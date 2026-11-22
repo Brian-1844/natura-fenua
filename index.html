@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#1f5c3a">
+<title>Natura Fenua</title>
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="icon-192.png">
+<link rel="stylesheet" href="vendor/leaflet/leaflet.css">
+<style>
+:root{--bg:#f5f1e6;--card:#fffdf7;--ink:#1d2a22;--mute:#56645b;--green:#1f5c3a;--lagoon:#0f6e6b;--sand:#e9dfc6;--warn:#9a3412;--warnbg:#fdecdc;--line:#ddd3bb;--ok:#d9efe0}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+button,input,select{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--lagoon);outline-offset:2px}
+.view{display:none;min-height:100vh;padding:calc(env(safe-area-inset-top) + 12px) 16px 32px;max-width:640px;margin:0 auto}
+.view.on{display:block}
+header{display:flex;align-items:center;gap:10px;margin-bottom:14px}
+header h1{font-size:22px;margin:0;flex:1;font-weight:600}
+header h1 small{display:block;font-size:14px;color:var(--mute);font-weight:400}
+.ib{border:1px solid var(--line);background:var(--card);min-width:48px;height:48px;border-radius:14px;font-size:20px;cursor:pointer;position:relative;padding:0 10px}
+.ib.has::after{content:"";position:absolute;top:6px;right:6px;width:10px;height:10px;border-radius:50%;background:#e11d48}
+.logo{font-size:26px;font-weight:700;color:var(--green);letter-spacing:.3px}.logo span{color:var(--lagoon)}
+h2.q{font-size:18px;margin:6px 0 10px;font-weight:600}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.tile{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:16px 14px;text-align:left;cursor:pointer;min-height:132px;display:flex;flex-direction:column;gap:4px}
+.tile .em{font-size:34px;line-height:1}.tile b{font-size:17px}.tile i{font-style:normal;font-size:14px;color:var(--mute)}
+.tile.wide{grid-column:1/-1;min-height:auto;flex-direction:row;align-items:center;gap:12px}
+.pill{display:inline-block;font-size:13px;padding:2px 9px;border-radius:99px;background:var(--sand);color:#5b4a1f;align-self:flex-start;margin-top:auto}
+.pill.ok{background:var(--ok);color:var(--green)}
+.btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;min-height:52px;border:0;border-radius:14px;padding:12px 14px;font-weight:600;background:var(--green);color:#fff;cursor:pointer;margin:8px 0;text-decoration:none;text-align:center}
+.btn.alt{background:var(--card);color:var(--green);border:2px solid #b9c9bd}
+.btn.lag{background:var(--lagoon)}
+.btn.link{background:none;color:var(--green);text-decoration:underline;min-height:44px;font-weight:500}
+.btn:disabled{opacity:.55}
+.row{display:flex;gap:8px}.row .btn{flex:1}
+.search{width:100%;padding:12px 14px;border-radius:12px;border:1px solid var(--line);background:var(--card);margin:8px 0 4px;min-height:48px}
+.list{display:flex;flex-direction:column;gap:8px;margin-top:8px}
+.sp{display:flex;align-items:center;gap:12px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:10px 12px;cursor:pointer;text-align:left;width:100%;min-height:64px}
+.sp .em{width:48px;height:48px;border-radius:10px;background:var(--sand);display:grid;place-items:center;font-size:22px;flex:none;overflow:hidden}
+.sp .em img{width:100%;height:100%;object-fit:cover}
+.sp b{display:block}.sp i{font-style:normal;font-size:14px;color:var(--mute)}
+.sp .n{margin-left:auto;font-size:13px;color:var(--mute);white-space:nowrap}
+.chev{margin-left:auto;font-size:22px;color:var(--mute)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px 16px;margin:10px 0}
+.card h2{font-size:20px;margin:0}.card h3{font-size:15px;margin:0 0 6px;color:var(--mute);font-weight:500}
+.card.info{background:#eef5f0;border-color:#cfe2d5}
+.sci{font-style:italic;color:var(--mute)}
+.warn{background:var(--warnbg);color:var(--warn);border-radius:12px;padding:10px 12px;margin:10px 0;font-size:15px}
+.signal{background:#fff4d6;color:#6b4e00;border-radius:12px;padding:10px 12px;margin:10px 0}
+table{width:100%;border-collapse:collapse}td,th{padding:8px 0;border-top:1px solid var(--line);vertical-align:top;text-align:left}td:first-child{color:var(--mute);width:38%;padding-right:10px;font-size:14px}
+.cmp td{width:31%!important;font-size:15px;padding-right:8px}.cmp td:first-child{width:24%!important;font-size:13px}.cmp th{font-size:16px;padding-right:8px}
+.cmp .diff{background:#fff8e6}
+.photo{width:100%;max-height:44vh;object-fit:cover;border-radius:16px;display:block;background:#000}
+.res{display:flex;flex-direction:column;gap:8px;margin-top:8px}
+.res button{display:flex;align-items:center;gap:10px;text-align:left;width:100%;border:1px solid var(--line);background:var(--card);border-radius:14px;padding:10px 12px;cursor:pointer;min-height:60px}
+.lvl{font-size:13px;padding:2px 8px;border-radius:99px;background:var(--sand);color:#5b4a1f;white-space:nowrap}
+.lvl.hi{background:var(--ok);color:var(--green)}
+.st{color:var(--mute);font-size:15px;margin:8px 0}
+.big{font-size:21px;font-weight:600;margin:12px 0 4px}
+.muted{color:var(--mute);font-size:14px}
+.ref{display:flex;gap:10px;align-items:center;margin:8px 0}.ref img{width:72px;height:72px;object-fit:cover;border-radius:10px}
+.modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:9;align-items:flex-end;justify-content:center}
+.modal.on{display:flex}
+.sheet{background:var(--bg);width:100%;max-width:640px;border-radius:20px 20px 0 0;padding:18px 16px calc(env(safe-area-inset-bottom) + 18px);max-height:90vh;overflow:auto}
+.prog{display:none;height:12px;background:var(--sand);border-radius:9px;overflow:hidden;margin:8px 0}.prog b{display:block;height:100%;width:0;background:var(--lagoon);transition:width .2s}
+.prog.ind b{width:35%!important;animation:ind 1.2s linear infinite}
+@keyframes ind{from{transform:translateX(-100%)}to{transform:translateX(300%)}}
+.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:#1d2a22;color:#fff;padding:10px 16px;border-radius:12px;font-size:15px;opacity:0;transition:.25s;pointer-events:none;z-index:10;max-width:90%}
+.toast.on{opacity:1}
+select{width:100%;padding:12px;border-radius:12px;border:1px solid var(--line);background:var(--card);margin:6px 0;min-height:48px}
+input[type=text]{width:100%;padding:12px;border-radius:12px;border:1px solid var(--line);background:var(--card);min-height:48px}
+label.chk{display:flex;gap:10px;align-items:flex-start;margin:8px 0;font-size:15px}label.chk input{width:22px;height:22px;margin-top:2px;flex:none}
+.thumbs{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-top:8px}.thumbs img{width:100%;aspect-ratio:1;object-fit:cover;border-radius:8px}
+.rec{background:#b91c1c}
+.banner{display:flex;align-items:center;gap:10px;background:#e3f1ef;border:1px solid #b9dcd7;border-radius:16px;padding:12px 14px;margin:0 0 12px}
+.banner .btn{width:auto;margin:0;padding:10px 14px;min-height:44px}
+/* Accueil */
+#welcome{display:none;flex-direction:column;min-height:100vh;padding:calc(env(safe-area-inset-top) + 24px) 22px calc(env(safe-area-inset-bottom) + 24px);max-width:640px;margin:0 auto}
+#welcome.on{display:flex}
+.wcard{flex:1;display:flex;flex-direction:column;justify-content:center;gap:12px}
+.wcard .wem{font-size:72px;line-height:1}.wcard h2{font-size:28px;margin:0}.wcard p{font-size:18px;margin:0}
+.wcard ol{font-size:18px;margin:0;padding-left:22px}.wcard li{margin:6px 0}
+.dots{display:flex;gap:8px;justify-content:center;margin:16px 0}.dots i{width:10px;height:10px;border-radius:50%;background:var(--line)}.dots i.on{background:var(--green);width:26px;border-radius:9px}
+.danger{background:#b91c1c;color:#fff;border-radius:14px;padding:12px 14px;margin:10px 0;font-size:16px}
+.danger b{display:block;font-size:18px;letter-spacing:.5px}
+.dbadge{background:#b91c1c;color:#fff;border-radius:99px;padding:1px 8px;font-size:12px;font-weight:700}
+.sp.isdanger{border:2px solid #b91c1c}.sp.isdanger .em{background:#fde2e2}
+#mapEl{height:calc(100vh - 230px);min-height:320px;border-radius:16px;border:1px solid var(--line);z-index:1}
+.maptool{display:flex;gap:8px;margin:8px 0}.maptool .btn{margin:0;min-height:48px;font-size:15px}
+.adding #mapEl{outline:3px dashed var(--lagoon)}
+.leaflet-popup-content{font:15px/1.4 system-ui,sans-serif}.leaflet-popup-content .btn{min-height:40px;padding:6px 10px;margin:6px 0 0;font-size:14px}
+.badge{display:inline-flex;align-items:center;gap:6px;background:var(--card);border:1px solid var(--line);border-radius:99px;padding:6px 12px;margin:4px 4px 0 0;font-size:14px}.badge.off{opacity:.4;filter:grayscale(1)}
+@media print{.view{display:none!important}#disc{display:block!important}#disc header .ib,#disc .ib,#discPrint,#discFirst{display:none!important}}
+.demobar{position:sticky;top:0;z-index:5;background:#7c3aed;color:#fff;text-align:center;font-weight:600;padding:6px;font-size:14px}
+.hide{display:none!important}
+</style>
+</head>
+<body>
+<div class="demobar hide" id="demoBar">MODE DÉMO · exemples, pas de vraies analyses · <u id="demoExit" style="cursor:pointer">Quitter</u></div>
+
+<!-- Bienvenue (premier lancement) -->
+<section id="welcome" aria-live="polite">
+  <div class="wcard" id="wcard"></div>
+  <div class="dots" id="wdots"></div>
+  <button class="btn" id="wNext">Suivant</button>
+  <button class="btn link" id="wSkip">Passer</button>
+</section>
+
+<!-- Accueil -->
+<section class="view" id="home">
+  <header>
+    <div style="flex:1"><div class="logo">Natura <span>Fenua</span></div><div class="muted">La nature de Tahiti, même sans réseau</div></div>
+    <button class="ib" id="bAbout" aria-label="Infos et mises à jour">ⓘ</button>
+  </header>
+  <div class="banner hide" id="upBanner"><span style="flex:1"><b>🆕 Nouvelle version</b><br><span class="muted" id="upBannerT">Conseil : utilise le wifi</span></span><button class="btn lag" id="upBannerGo">Mettre à jour</button></div>
+  <div class="pill" id="offPill" style="margin:0 0 8px"></div>
+  <h2 class="q">Que veux-tu reconnaître ?</h2>
+  <div class="card info hide" id="dayChal"></div>
+  <div class="grid" id="tiles"></div>
+  <div class="grid" style="margin-top:12px">
+    <button class="tile wide" id="bDisc"><span class="em">📒</span><span><b>Mon carnet de découvertes</b><br><i id="discN">Ce que tu as trouvé</i></span></button>
+    <button class="tile wide" id="bDanger" style="border:2px solid #b91c1c"><span class="em">☠️</span><span><b>Espèces dangereuses</b><br><i>Plantes, champignons et bêtes à connaître</i></span></button>
+    <button class="tile wide" id="bMap"><span class="em">🗺️</span><span><b>Ma carte de Tahiti</b><br><i>Place un repère là où tu as vu une espèce</i></span></button>
+    <button class="tile wide" id="bCmp"><span class="em">⚖️</span><span><b>Comparer deux espèces</b><br><i>Côte à côte, pour ne plus les confondre</i></span></button>
+    <button class="tile wide" id="bLearn"><span class="em">📸</span><span><b>Aider l'app à apprendre</b><br><i>Ajoute tes photos pour qu'elle reconnaisse mieux</i></span></button>
+  </div>
+</section>
+
+<!-- Section -->
+<section class="view" id="sec">
+  <header><button class="ib" data-back aria-label="Retour">←</button><h1 id="secT"></h1></header>
+  <div class="card info hide" id="secEmpty"><div id="secEmptyT"></div><button class="btn alt" id="secHelp">📸 Aider l'app à apprendre</button></div>
+  <div class="row">
+    <button class="btn" id="bShoot">📷 Photo</button>
+    <button class="btn alt" id="bPick">🖼 Galerie</button>
+  </div>
+  <button class="btn lag hide" id="bDemoPhoto">✨ Essayer avec une photo d'exemple (démo)</button>
+  <div class="muted">Conseil : de près, une seule espèce au centre, bien éclairée.</div>
+  <button class="btn lag hide" id="bSong">🎤 Enregistrer un chant (reconnaissance bientôt)</button>
+  <div class="muted hide" id="songNote">Enregistre de loin, sans t'approcher des nids.</div>
+  <div class="warn hide" id="secWarn"></div>
+  <input class="search" id="q" placeholder="Chercher un nom…" autocomplete="off" aria-label="Chercher un nom">
+  <div class="list" id="spList"></div>
+</section>
+
+<!-- Résultat -->
+<section class="view" id="res">
+  <header><button class="ib" data-back aria-label="Retour">←</button><h1>Résultat</h1></header>
+  <img class="photo" id="resImg" alt="Ta photo">
+  <div class="big" id="resT" aria-live="polite">Analyse…</div>
+  <div class="st" id="resSt"></div>
+  <div class="danger hide" id="resDanger"></div>
+  <div class="warn hide" id="resWarn"></div>
+  <div class="ref hide" id="resRef"><img alt=""><span class="muted">Ressemble le plus à cette photo d'apprentissage</span></div>
+  <div class="res" id="resList"></div>
+  <select class="hide" id="wrongSel" aria-label="Choisir l'espèce"></select>
+  <button class="btn" id="bSave">📒 Garder dans mon carnet</button>
+  <button class="btn alt" id="bTeach">📸 Utiliser cette photo pour apprendre</button>
+  <button class="btn link" id="bWrong">Ce n'est pas ça ? Choisir moi-même</button>
+</section>
+
+<!-- Fiche -->
+<section class="view" id="fiche">
+  <header><button class="ib" data-back aria-label="Retour">←</button><h1 id="fT">Fiche</h1></header>
+  <div class="card"><h2 id="fName"></h2><div id="fFr"></div><div class="sci" id="fSci"></div></div>
+  <div class="danger hide" id="fDanger"></div>
+  <div class="warn hide" id="fWarn"></div>
+  <div class="signal hide" id="fSignal"><b>Espèce envahissante !</b> Signale-la aux services de l'environnement ou de la biosécurité du Pays (photo, lieu, date). Merci, tu protèges le fenua.<button class="btn alt" id="fSignalGo">📤 Préparer un signalement</button></div>
+  <div class="card"><table id="fInfo"></table></div>
+  <div class="card hide" id="fSim"><h3>Ressemble à</h3><div class="list" id="fSimList"></div></div>
+  <div class="card"><h3>Photos d'apprentissage</h3><div class="muted" id="fCount"></div><div class="thumbs" id="fThumbs"></div></div>
+  <button class="btn alt" id="fMap">📍 Voir ou ajouter sur ma carte</button>
+  <button class="btn alt" id="fCmp">⚖️ Comparer avec une autre espèce</button>
+  <button class="btn" id="fLearn">📸 Ajouter des photos de cette espèce</button>
+</section>
+
+<!-- Comparer -->
+<section class="view" id="cmp">
+  <header><button class="ib" data-back aria-label="Retour">←</button><h1>Comparer</h1></header>
+  <select id="cSec" aria-label="Catégorie"></select>
+  <div class="row"><select id="cA" aria-label="Première espèce"></select><select id="cB" aria-label="Deuxième espèce"></select></div>
+  <div class="card"><table class="cmp" id="cTab"></table></div>
+  <div class="muted">Les lignes en jaune sont celles qui changent le plus : regarde-les en premier.</div>
+</section>
+
+<!-- Dangereux -->
+<section class="view" id="dangerV">
+  <header><button class="ib" data-back aria-label="Retour">←</button><h1>☠️ Espèces dangereuses</h1></header>
+  <div class="danger"><b>En cas d'urgence : appelle le 15 (SAMU)</b>Intoxication, morsure ou piqûre grave, malaise : appelle tout de suite. Garde la plante, le champignon ou une photo pour les secours.</div>
+  <div class="list" id="dangerList"></div>
+</section>
+
+<!-- Carte -->
+<section class="view" id="mapV">
+  <header><button class="ib" data-back aria-label="Retour">←</button><h1>🗺️ Ma carte<small id="mapSub">Tes repères restent sur ton téléphone</small></h1></header>
+  <select id="mFilter" aria-label="Filtrer"></select>
+  <div id="mapEl" role="application" aria-label="Carte de Tahiti"></div>
+  <div class="maptool"><button class="btn" id="mAdd">➕ Ajouter un repère</button><button class="btn alt" id="mMe">📍 Ma position</button></div>
+  <div class="muted" id="mapSt"></div>
+</section>
+<div class="modal" id="markSheet"><div class="sheet" role="dialog" aria-label="Nouveau repère">
+  <h2 style="margin:0 0 6px">📍 Nouveau repère</h2>
+  <div class="muted" id="mkWhere"></div>
+  <select id="mkSec" aria-label="Catégorie"></select>
+  <select id="mkSp" aria-label="Espèce"></select>
+  <input type="text" id="mkNote" placeholder="Note (facultatif) : nombre, état, date…">
+  <div class="warn hide" id="mkRare"></div>
+  <button class="btn" id="mkSave">Enregistrer le repère</button>
+  <button class="btn alt" id="mkCancel">Annuler</button>
+</div></div>
+
+<!-- Apprendre -->
+<section class="view" id="learn">
+  <header><button class="ib" data-back aria-label="Retour">←</button><h1>Aider l'app à apprendre<small>Tes photos restent sur ton téléphone</small></h1></header>
+  <div class="card">
+    <h3>1. Que photographies-tu ?</h3>
+    <select id="lSec" aria-label="Catégorie"></select>
+    <select id="lSp" aria-label="Espèce"></select>
+    <div class="muted" id="lCount"></div>
+    <div class="prog" id="lGoal" style="display:block"><b></b></div>
+  </div>
+  <div class="card">
+    <h3>2. Prends des photos variées</h3>
+    <div class="muted">Mieux vaut 10 plantes différentes que 100 photos de la même. Change d'angle, de distance, de lumière. Pas de visages.</div>
+    <div class="row"><button class="btn" id="lShoot">📷 Photo</button><button class="btn alt" id="lPick">🖼 Galerie</button></div>
+    <div class="prog" id="lProg"><b></b></div>
+    <div class="st" id="lSt" aria-live="polite"></div>
+  </div>
+  <div class="card">
+    <h3>3. Partager pour que tout le monde en profite</h3>
+    <div class="muted">Crée un fichier avec tes photos, rangées par espèce, à envoyer à l'équipe Natura Fenua.</div>
+    <label class="chk"><input type="checkbox" id="lOk"> <span>J'ai pris ces photos moi-même, il n'y a pas de visages, et j'accepte qu'elles soient partagées librement (CC BY).</span></label>
+    <input type="text" id="lName" placeholder="Ton nom pour les remerciements (facultatif)" autocomplete="name">
+    <button class="btn lag" id="lZip">📦 Exporter mes photos (ZIP)</button>
+    <div class="st" id="lZipSt"></div>
+  </div>
+</section>
+
+<!-- Carnet -->
+<section class="view" id="disc">
+  <header><button class="ib" data-back aria-label="Retour">←</button><h1>Mon carnet</h1></header>
+  <div id="discStats"></div>
+  <div id="badges"></div>
+  <button class="btn alt hide" id="discPrint">🖨 Imprimer mon carnet</button>
+  <div id="discEmpty"><p class="muted">Ton carnet est vide pour l'instant.</p><button class="btn" id="discFirst">📷 Faire ma première découverte</button></div>
+  <div class="list" id="discList"></div>
+</section>
+
+<!-- Infos et mises à jour -->
+<div class="modal" id="about"><div class="sheet" role="dialog" aria-label="Infos">
+  <div class="logo">Natura <span>Fenua</span></div>
+  <p class="muted" id="ver"></p>
+  <div class="st" id="upSt" aria-live="polite"></div>
+  <div class="prog" id="upProg"><b></b></div>
+  <a class="btn lag hide" id="upGo" href="#">Télécharger la mise à jour</a>
+  <button class="btn" id="upCheck">🔄 Rechercher une mise à jour</button>
+  <a class="btn alt" id="apkDl" href="#" target="_blank" rel="noopener">Télécharger l'app Android (APK)</a>
+  <label class="chk"><input type="checkbox" id="demoMode"> <span><b>Mode démo</b> : pour présenter l'app, avec des exemples (carnet, carte, résultats). Rien n'est mélangé à tes vraies données.</span></label>
+  <label class="chk"><input type="checkbox" id="schoolMode"> <span><b>Mode école</b> : pas de position GPS, pas d'export de photos, un défi du jour sur l'accueil.</span></label>
+  <button class="btn alt" id="bTuto">👋 Revoir l'accueil et le tutoriel</button>
+  <p>Reconnaît les nuages, plantes et arbres, oiseaux, insectes et champignons de Tahiti, <b>sans connexion</b>. Tes photos et ton carnet restent sur ton téléphone.</p>
+  <div class="warn">L'app peut se tromper. Ne mange jamais une plante ou un champignon d'après l'app. En cas d'intoxication, de piqûre ou de morsure grave : appelle le <b>15</b> (SAMU).</div>
+  <p class="muted" id="credits"></p>
+  <button class="btn alt" id="aboutClose">Fermer</button>
+</div></div>
+
+<input type="file" id="fShoot" accept="image/*" capture="environment" class="hide">
+<input type="file" id="fPick" accept="image/*" class="hide">
+<input type="file" id="fLShoot" accept="image/*" capture="environment" class="hide">
+<input type="file" id="fLPick" accept="image/*" multiple class="hide">
+<div class="toast" id="toast" role="status"></div>
+
+<script src="vendor/leaflet/leaflet.js"></script>
+<script>
+const APP_VERSION='0.4.0';
+const REPO='Brian-1844/natura-fenua';
+const APK='natura-fenua.apk';
+const MPCDN='https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.14';
+const EMB_FILE='mobilenet_v3_large.tflite';
+const EMB_URL='https://storage.googleapis.com/mediapipe-models/image_embedder/mobilenet_v3_large/float32/latest/mobilenet_v3_large.tflite';
+const SECTIONS={
+  nuages:{t:'Nuages',e:'☁️',one:'nuage'},
+  plantes:{t:'Plantes et arbres',e:'🌺',one:'plante',warn:"L'app peut se tromper : ne mange rien et ne touche pas une plante si tu n'es pas sûr."},
+  oiseaux:{t:'Oiseaux',e:'🐦',one:'oiseau'},
+  insectes:{t:'Insectes',e:'🐞',one:'insecte',warn:'Ne touche pas un insecte inconnu : certains piquent ou mordent.'},
+  champignons:{t:'Champignons',e:'🍄',one:'champignon',warn:"Ne mange JAMAIS un champignon d'après l'app. Même les experts se trompent."}
+};
+const OTHER='autre';
+const M=3;                                   // score d'une espèce = moyenne de ses 3 photos les plus proches
+const THR={sure:.80,maybe:.65,margin:.05};   // seuils par défaut (remplacés par ceux calculés sur GitHub)
+const WELCOME=[
+  {e:'🌺',h:'Ia ora na !',p:'Bienvenue dans <b>Natura Fenua</b>. Reconnais les nuages, plantes, oiseaux, insectes et champignons de Tahiti, <b>même sans réseau</b>.'},
+  {e:'📷',h:'Comment ça marche',l:['Choisis : nuage, plante, oiseau, insecte ou champignon.','Prends une photo de près, une seule espèce, bien éclairée.','Lis la fiche (reo Tahiti, français, nom scientifique) et garde ta découverte dans ton carnet.']},
+  {e:'🤝',h:"L'app apprend avec toi",p:"Elle débute : elle peut se tromper ou ne pas encore connaître une espèce. Corrige-la et ajoute tes photos, elle devient meilleure.<br><br>⚠ Ne mange jamais une plante ou un champignon d'après l'app."},
+  {e:'🔒',h:'Sur ton téléphone',p:"Tes photos et ton carnet restent sur ton téléphone. Pour les oiseaux rares, l'app ne note jamais l'endroit.<br><br><button class='btn alt' id='wDemo'>✨ Voir une démo d'abord</button>",btn:"C'est parti !"}
+];
+
+const $=s=>document.querySelector(s);
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+let tt;function toast(m){const t=$('#toast');t.textContent=m;t.classList.add('on');clearTimeout(tt);tt=setTimeout(()=>t.classList.remove('on'),3000)}
+const native=!!(window.Capacitor&&window.Capacitor.isNativePlatform&&window.Capacitor.isNativePlatform());
+const plug=n=>window.Capacitor&&window.Capacitor.Plugins&&window.Capacitor.Plugins[n];
+const LS={get:k=>{try{return localStorage.getItem(k)}catch(e){return null}},set:(k,v)=>{try{localStorage.setItem(k,v)}catch(e){}}};
+
+/* ---------- Données ---------- */
+let DATA={};const spOf=(sec,id)=>(DATA[sec]||[]).find(s=>s.id===id);
+const nameOf=(sec,id)=>{if(id===OTHER)return 'Pas dans le carnet';const s=spOf(sec,id);return s?(s.ta||s.fr):id};
+const fullName=x=>x.ta?`${x.ta} (${x.fr})`:x.fr;
+const subOf=s=>s.ta?s.fr:'';
+const dangerHtml=x=>x&&x.danger?`<b>☠ DANGER</b>${esc(x.danger)}`:'';
+
+/* ---------- Base locale (IndexedDB) ---------- */
+let DB;
+function openDB(){return new Promise((ok,ko)=>{const r=indexedDB.open('natura-fenua',2);
+  r.onupgradeneeded=()=>{const d=r.result,has=n=>d.objectStoreNames.contains(n);
+    if(!has('disc'))d.createObjectStore('disc',{keyPath:'id',autoIncrement:true});
+    if(!has('learn')){const l=d.createObjectStore('learn',{keyPath:'id',autoIncrement:true});l.createIndex('sec','sec')}
+    if(!has('marks'))d.createObjectStore('marks',{keyPath:'id',autoIncrement:true})};
+  r.onsuccess=()=>{DB=r.result;ok()};r.onerror=()=>ko(r.error)})}
+const tx=(st,mode,fn)=>new Promise((ok,ko)=>{const t=DB.transaction(st,mode);const s=t.objectStore(st);const out=fn(s);t.oncomplete=()=>ok(out&&out.result!==undefined?out.result:out);t.onerror=()=>ko(t.error)});
+let dbAdd=(st,v)=>tx(st,'readwrite',s=>s.add(v));
+let dbDel=(st,id)=>tx(st,'readwrite',s=>s.delete(id));
+let dbAll=st=>tx(st,'readonly',s=>s.getAll());
+/* Mode démo : exemples gardés en mémoire seulement, jamais dans la vraie base. */
+const DEMO={on:false,disc:[],marks:[],n:-1};
+function demoData(){const t=Date.now(),d=864e5;DEMO.n=-1;const id=()=>DEMO.n--;
+  DEMO.disc=[{id:id(),sec:'plantes',sp:'nono',date:t-2*d,thumb:'demo/nono.jpg',pos:{lat:-17.5395,lon:-149.5420}},
+    {id:id(),sec:'nuages',sp:'cumulus',date:t-d,pos:null},{id:id(),sec:'plantes',sp:'tiare',date:t-3*d,pos:{lat:-17.5352,lon:-149.5698}},
+    {id:id(),sec:'oiseaux',sp:'otuu',date:t-4*d,pos:{lat:-17.4955,lon:-149.4996}},{id:id(),sec:'oiseaux',sp:null,audio:null,date:t-5*d,pos:null}];
+  DEMO.marks=[{id:id(),sec:'plantes',sp:'mikonia',lat:-17.5800,lon:-149.4300,note:'Beaucoup de pieds au bord du sentier',date:t-6*d},
+    {id:id(),sec:'plantes',sp:'datura',lat:-17.5460,lon:-149.5560,note:'Jardin, à côté de la route',date:t-7*d},
+    {id:id(),sec:'insectes',sp:'fourmi-feu',lat:-17.7300,lon:-149.3100,note:'Dans des pots de plantes',date:t-8*d}]}
+const _dbAll=dbAll,_dbAdd=dbAdd,_dbDel=dbDel;
+dbAll=async st=>{const r=await _dbAll(st).catch(()=>[]);return DEMO.on&&(st==='disc'||st==='marks')?r.concat(DEMO[st]):r};
+dbAdd=async(st,v)=>{if(DEMO.on&&st!=='learn'){const x={...v,id:DEMO.n--};DEMO[st].push(x);return x.id}if(DEMO.on&&st==='learn'){toast('Mode démo : la photo n\'est pas gardée');return null}return _dbAdd(st,v)};
+dbDel=async(st,id)=>{if(id<0){DEMO[st]=DEMO[st].filter(x=>x.id!==id);return}return _dbDel(st,id)};
+const dbBySec=sec=>tx('learn','readonly',s=>s.index('sec').getAll(sec));
+
+/* ---------- Navigation ---------- */
+const hist=[];
+function go(id,push=true){const cur=document.querySelector('.view.on');if(push&&cur&&cur.id!==id)hist.push(cur.id);document.querySelectorAll('.view').forEach(v=>v.classList.toggle('on',v.id===id));scrollTo(0,0);if(push)history.pushState({v:id},'')}
+function back(){const p=hist.pop()||'home';go(p,false);if(p==='home')renderHome();if(p==='sec')renderSec();if(p==='disc')renderDisc()}
+document.querySelectorAll('[data-back]').forEach(b=>b.onclick=()=>history.back());
+addEventListener('popstate',()=>{if($('#about').classList.contains('on')){$('#about').classList.remove('on');return}if($('#welcome').classList.contains('on'))return;if($('#markSheet').classList.contains('on')){$('#markSheet').classList.remove('on');history.pushState({},'');return}back()});
+
+/* ---------- Bienvenue ---------- */
+let wi=0;
+function showWelcome(){wi=0;$('#welcome').classList.add('on');document.querySelectorAll('.view').forEach(v=>v.classList.remove('on'));drawWelcome()}
+function drawWelcome(){const w=WELCOME[wi];
+  $('#wcard').innerHTML=`<div class="wem">${w.e}</div><h2>${w.h}</h2>`+(w.p?`<p>${w.p}</p>`:'')+(w.l?`<ol>${w.l.map(x=>`<li>${x}</li>`).join('')}</ol>`:'');
+  $('#wdots').innerHTML=WELCOME.map((_,i)=>`<i class="${i===wi?'on':''}"></i>`).join('');
+  $('#wNext').textContent=w.btn||'Suivant';$('#wSkip').classList.toggle('hide',wi===WELCOME.length-1)}
+function endWelcome(){LS.set('nf_seen','1');$('#welcome').classList.remove('on');hist.length=0;go('home',false);renderHome()}
+$('#wNext').onclick=()=>{if(wi<WELCOME.length-1){wi++;drawWelcome()}else endWelcome()};
+$('#wSkip').onclick=endWelcome;
+let tx0=null;$('#welcome').addEventListener('touchstart',e=>tx0=e.touches[0].clientX,{passive:true});
+$('#welcome').addEventListener('touchend',e=>{if(tx0===null)return;const d=e.changedTouches[0].clientX-tx0;tx0=null;if(d<-50&&wi<WELCOME.length-1){wi++;drawWelcome()}else if(d>50&&wi>0){wi--;drawWelcome()}});
+
+/* ---------- IA hors ligne : empreinte d'une photo ---------- */
+let EMB=null,embLoading=null;
+function loadEmbedder(){
+  if(EMB)return Promise.resolve(EMB);if(embLoading)return embLoading;
+  embLoading=(async()=>{
+    const base=native?new URL('mediapipe/',location.href).href:MPCDN+'/';
+    const V=await import(base+(native?'vision_bundle.js':'vision_bundle.mjs'));
+    const files=await V.FilesetResolver.forVisionTasks(base+'wasm');
+    const model=native?new URL('models/'+EMB_FILE,location.href).href:EMB_URL;
+    const e0=await V.ImageEmbedder.createFromOptions(files,{baseOptions:{modelAssetPath:model,delegate:'CPU'},l2Normalize:true,quantize:false,runningMode:'IMAGE'});
+    EMB=e0;try{const c=document.createElement('canvas');c.width=c.height=8;EMB.embed(c)}catch(e){} // échauffement
+    setTimeout(offlineState,500);
+    return EMB;
+  })();
+  embLoading.catch(()=>{embLoading=null});return embLoading;
+}
+function quantize(f){let n=0;for(let i=0;i<f.length;i++)n+=f[i]*f[i];n=Math.sqrt(n)||1;const q=new Int8Array(f.length);for(let i=0;i<f.length;i++){const v=Math.round(f[i]/n*127);q[i]=v>127?127:v<-127?-127:v}return q}
+const b64ToI8=s=>{const b=atob(s),a=new Int8Array(b.length);for(let i=0;i<b.length;i++){const c=b.charCodeAt(i);a[i]=c>127?c-256:c}return a};
+async function loadImg(src){const im=new Image();im.src=src;await im.decode();return im}
+/* Même préparation que sur GitHub (tools/build_refs.py) : carré central, fond blanc, 256 x 256, réduction progressive. */
+function squareCanvas(im,size=256){
+  const w=im.naturalWidth||im.width,h=im.naturalHeight||im.height,s=Math.min(w,h);
+  let src=document.createElement('canvas');src.width=src.height=s;let x=src.getContext('2d');x.fillStyle='#fff';x.fillRect(0,0,s,s);x.drawImage(im,(w-s)/2,(h-s)/2,s,s,0,0,s,s);
+  while(src.width>size*2){const n=document.createElement('canvas');n.width=n.height=Math.round(src.width/2);const y=n.getContext('2d');y.imageSmoothingQuality='high';y.drawImage(src,0,0,n.width,n.height);src=n}
+  const out=document.createElement('canvas');out.width=out.height=size;const z=out.getContext('2d');z.imageSmoothingQuality='high';z.drawImage(src,0,0,size,size);return out}
+function mirror(c){const m=document.createElement('canvas');m.width=c.width;m.height=c.height;const x=m.getContext('2d');x.scale(-1,1);x.drawImage(c,-c.width,0);return m}
+function fitCanvas(im,max){const w=im.naturalWidth,h=im.naturalHeight,k=Math.min(1,max/Math.max(w,h));const c=document.createElement('canvas');c.width=Math.round(w*k);c.height=Math.round(h*k);const x=c.getContext('2d');x.imageSmoothingQuality='high';x.drawImage(im,0,0,c.width,c.height);return c}
+async function embedImage(im){const e=await loadEmbedder();const c=squareCanvas(im);
+  const a=e.embed(c).embeddings[0].floatEmbedding,b=e.embed(mirror(c)).embeddings[0].floatEmbedding;
+  const na=Math.hypot(...a)||1,nb=Math.hypot(...b)||1;const f=new Float32Array(a.length);for(let i=0;i<a.length;i++)f[i]=a[i]/na+b[i]/nb;return quantize(f)}
+
+/* ---------- Références : photos d'apprentissage ---------- */
+const REFS={},MINE={};
+async function repoRefs(sec){if(!(sec in REFS)){
+  try{const r=await fetch('refs/'+sec+'.json',{cache:'no-cache'});if(!r.ok)throw 0;const j=await r.json();
+    REFS[sec]={counts:j.counts||{},thr:j.thr||null,model:j.model,items:j.items.map(([c,v])=>({c,v:b64ToI8(v)}))}}
+  catch(e){REFS[sec]={counts:{},thr:null,items:[]}}}
+  return REFS[sec]}
+async function mineRefs(sec){if(!(sec in MINE)){const all=await dbBySec(sec).catch(()=>[]);MINE[sec]=all.filter(x=>x.emb&&(x.model||EMB_FILE)===EMB_FILE&&x.v===2).map(x=>({c:x.sp,v:new Int8Array(x.emb),thumb:x.thumb}))}return MINE[sec]}
+async function loadRefs(sec){const r=await repoRefs(sec),m=await mineRefs(sec);return{counts:r.counts,thr:Object.assign({},THR,r.thr||{}),items:r.items.concat(m)}}
+/* Score par espèce = moyenne de ses M photos les plus proches (une espèce avec beaucoup de photos n'écrase pas les autres). */
+function classify(q,items){
+  const by={};
+  items.forEach((it,i)=>{let s=0;const v=it.v,n=Math.min(v.length,q.length);for(let j=0;j<n;j++)s+=v[j]*q[j];s/=16129;(by[it.c]=by[it.c]||[]).push([s,i])});
+  const out=Object.entries(by).map(([c,a])=>{a.sort((x,y)=>y[0]-x[0]);const t=a.slice(0,M);return{id:c,score:t.reduce((s,x)=>s+x[0],0)/t.length,bestIdx:t[0][1]}});
+  out.sort((a,b)=>b.score-a.score);out.forEach((o,i)=>o.margin=o.score-(i===0?(out[1]?out[1].score:0):out[0].score));return out}
+function level(o,thr){if(o.score>=thr.sure&&o.margin>=thr.margin)return['Très probable','hi'];if(o.score>=thr.maybe)return['Possible',''];return['Peu probable','']}
+
+/* ---------- Accueil ---------- */
+async function renderHome(){
+  const learn=await dbAll('learn').catch(()=>[]);
+  const html=[];for(const[k,s]of Object.entries(SECTIONS)){
+    const r=await repoRefs(k);const cl=new Set(r.items.map(x=>x.c).concat(learn.filter(x=>x.sec===k&&x.emb).map(x=>x.sp)));cl.delete(OTHER);
+    const ready=cl.size>=2||DEMO.on;const n=(DATA[k]||[]).length;
+    html.push(`<button class="tile" data-sec="${k}"><span class="em">${s.e}</span><b>${s.t}</b><i>Photographier ou lire les ${n} fiches</i><span class="pill ${ready?'ok':''}">${ready?'✔ Photo active':'Fiches (photo bientôt)'}</span></button>`)}
+  $('#tiles').innerHTML=html.join('');
+  document.querySelectorAll('[data-sec]').forEach(b=>b.onclick=()=>openSec(b.dataset.sec));
+  const d=await dbAll('disc').catch(()=>[]);$('#discN').textContent=d.length?`${d.length} découverte${d.length>1?'s':''}`:'Ce que tu as trouvé';
+}
+
+/* ---------- Section ---------- */
+let SEC='plantes';
+async function openSec(k){SEC=k;$('#q').value='';go('sec');await renderSec()}
+async function renderSec(){
+  const s=SECTIONS[SEC];$('#secT').textContent=s.e+' '+s.t;
+  $('#bSong').classList.toggle('hide',SEC!=='oiseaux');$('#songNote').classList.toggle('hide',SEC!=='oiseaux');
+  $('#secWarn').classList.toggle('hide',!s.warn);$('#secWarn').textContent=s.warn?'⚠ '+s.warn:'';
+  const refs=await loadRefs(SEC);const nPhotos={};refs.items.forEach(({c})=>nPhotos[c]=(nPhotos[c]||0)+1);
+  const classes=Object.keys(nPhotos).filter(c=>c!==OTHER).length;
+  $('#secEmpty').classList.toggle('hide',classes>=2||DEMO.on);$('#bDemoPhoto').classList.toggle('hide',!DEMO.on);
+  $('#secEmptyT').textContent=classes===1?`L'app ne connaît encore qu'une espèce ici : il en faut au moins 2 pour comparer. Tu peux déjà lire les fiches, ou l'aider avec tes photos.`:`La reconnaissance photo arrive bientôt ici. Tu peux déjà lire les fiches, ou aider l'app en ajoutant tes photos.`;
+  const q=$('#q').value.trim().toLowerCase();
+  const list=(DATA[SEC]||[]).filter(x=>!q||[x.ta,x.fr,x.sci].join(' ').toLowerCase().includes(q));
+  const mine=await mineRefs(SEC);const thumbs={};mine.forEach(m=>{if(m.thumb)thumbs[m.c]=m.thumb});
+  $('#spList').innerHTML=list.map(x=>{const n=nPhotos[x.id]||0;
+    return `<button class="sp ${x.danger?'isdanger':''}" data-id="${x.id}"><span class="em">${thumbs[x.id]?`<img src="${thumbs[x.id]}" alt="">`:s.e}</span><span><b>${esc(x.ta||x.fr)}</b><i>${esc(subOf(x)||x.sci)}</i></span><span class="n">${n?n+' 📷 ':''}${x.danger?'<span class="dbadge">☠ DANGER</span>':x.warn?'⚠':''}</span></button>`}).join('')||'<div class="muted">Aucun résultat.</div>';
+  document.querySelectorAll('#spList [data-id]').forEach(b=>b.onclick=()=>openFiche(SEC,b.dataset.id));
+}
+$('#q').oninput=()=>renderSec();
+$('#secHelp').onclick=()=>openLearn(SEC);
+$('#bShoot').onclick=()=>$('#fShoot').click();
+$('#bDemoPhoto').onclick=async()=>{SEC='plantes';const b=await(await fetch('demo/nono.jpg')).blob();b.demo=true;analyze(b)};
+$('#bPick').onclick=()=>$('#fPick').click();
+$('#fShoot').onchange=e=>{const f=e.target.files[0];e.target.value='';if(f)analyze(f)};
+$('#fPick').onchange=e=>{const f=e.target.files[0];e.target.value='';if(f)analyze(f)};
+
+/* ---------- Analyse d'une photo ---------- */
+let CUR=null;
+function setWarn(sec,id){const parts=[];const x=id&&spOf(sec,id);$('#resDanger').innerHTML=dangerHtml(x)+(x&&x.danger?'<br>Urgence : appelle le 15 (SAMU).':'');$('#resDanger').classList.toggle('hide',!(x&&x.danger));if(x&&x.warn)parts.push('⚠ '+x.warn);if(SECTIONS[sec].warn)parts.push(SECTIONS[sec].warn);
+  $('#resWarn').innerHTML=parts.map(esc).join('<br>');$('#resWarn').classList.toggle('hide',!parts.length)}
+async function analyze(file){
+  const url=URL.createObjectURL(file);CUR={sec:SEC,url,file,choice:null,q:null,sure:false};
+  $('#resImg').src=url;$('#resT').textContent='Analyse…';$('#resList').innerHTML='';$('#wrongSel').classList.add('hide');$('#resRef').classList.add('hide');setWarn(SEC,null);
+  $('#resSt').textContent=native?"Chargement de l'IA…":"Chargement de l'IA… (la première fois, il faut du réseau : environ 25 Mo, de préférence en wifi)";
+  go('res');
+  if(DEMO.on)return demoResult(file&&file.demo);
+  try{
+    const refs=await loadRefs(SEC);const im=await loadImg(url);
+    const classes=new Set(refs.items.map(x=>x.c));classes.delete(OTHER);
+    if(classes.size<2){$('#resT').textContent="Aide l'app à apprendre";$('#resSt').textContent=`Cette catégorie ne connaît pas encore assez d'espèces pour comparer. Choisis ce que c'est : ta photo l'aidera à apprendre.`;showWrong();return}
+    const q=await embedImage(im);CUR.q=q;
+    const out=classify(q,refs.items);const top=out[0];const thr=refs.thr;
+    const other=out.find(o=>o.id===OTHER);
+    const best=out.find(o=>o.id!==OTHER);
+    if(!best||top.id===OTHER||(other&&best.score-other.score<thr.margin)||best.score<thr.maybe){
+      $('#resT').textContent="Je ne reconnais rien de connu";$('#resSt').textContent="Ce n'est peut-être pas dans mon carnet. Essaie une photo plus proche, avec une seule espèce au centre. Ou choisis toi-même ci-dessous.";
+    }else{
+      const[lv]=level(best,thr);CUR.choice=best.id;CUR.sure=lv==='Très probable';
+      $('#resT').textContent=(CUR.sure?'':'Peut-être : ')+nameOf(SEC,best.id);
+      $('#resSt').textContent=CUR.sure?'Touche le nom pour voir sa fiche et vérifier.':"Je ne suis pas sûr. Compare avec la fiche, ou essaie une autre photo (plus proche, plus nette).";
+      setWarn(SEC,best.id);
+      const it=refs.items[best.bestIdx];if(it&&it.thumb){$('#resRef img').src=it.thumb;$('#resRef').classList.remove('hide')}
+    }
+    $('#resList').innerHTML=out.filter(o=>o.id!==OTHER).slice(0,3).map(o=>{const[lv,cl]=level(o,thr);const x=spOf(SEC,o.id)||{fr:o.id};
+      return `<button data-id="${o.id}"><span style="flex:1"><b>${esc(x.ta||x.fr)}</b><br><span class="muted">${esc(subOf(x)||x.sci||'')}</span></span><span class="lvl ${cl}">${lv}</span><span class="chev">›</span></button>`}).join('');
+    document.querySelectorAll('#resList [data-id]').forEach(b=>b.onclick=()=>openFiche(SEC,b.dataset.id));
+  }catch(err){console.error(err);$('#resT').textContent="L'analyse n'a pas marché";$('#resSt').textContent=native?"Essaie encore, ou redémarre l'app.":"Il faut du réseau la première fois pour télécharger l'IA. Dans l'app Android, elle est déjà incluse.";showWrong()}
+}
+async function demoResult(isSample){
+  $('#resSt').textContent='Analyse…';await new Promise(r=>setTimeout(r,900));
+  const L=DATA[SEC]||[];const pick=SEC==='plantes'?['nono','tamanu','uru']:L.slice(0,3).map(x=>x.id);
+  CUR.choice=pick[0];CUR.sure=true;
+  $('#resT').textContent=nameOf(SEC,pick[0]);
+  $('#resSt').textContent=isSample?"Exemple de démonstration : voici ce que l'app affiche quand elle reconnaît une espèce. Touche le nom pour voir sa fiche.":"⚠ Mode démo : ce résultat est un exemple, ta photo n'a pas vraiment été analysée.";
+  setWarn(SEC,pick[0]);
+  const lv=[['Très probable','hi'],['Possible',''],['Peu probable','']];
+  $('#resList').innerHTML=pick.map((id,i)=>{const x=spOf(SEC,id)||{fr:id};return `<button data-id="${id}"><span style="flex:1"><b>${esc(x.ta||x.fr)}</b><br><span class="muted">${esc(subOf(x)||x.sci||'')}</span></span><span class="lvl ${lv[i][1]}">${lv[i][0]}</span><span class="chev">›</span></button>`}).join('');
+  document.querySelectorAll('#resList [data-id]').forEach(b=>b.onclick=()=>openFiche(SEC,b.dataset.id))}
+function showWrong(){const sel=$('#wrongSel');sel.innerHTML='<option value="">— Choisis ce que c\'est —</option>'+(DATA[CUR.sec]||[]).map(x=>`<option value="${x.id}">${esc(fullName(x))}</option>`).join('')+`<option value="${OTHER}">Autre / rien de tout ça</option>`;sel.classList.remove('hide');sel.value=CUR.choice||'';sel.focus()}
+$('#bWrong').onclick=showWrong;
+$('#wrongSel').onchange=e=>{if(!CUR)return;CUR.choice=e.target.value||null;CUR.sure=!!CUR.choice;if(CUR.choice){$('#resT').textContent=nameOf(CUR.sec,CUR.choice);setWarn(CUR.sec,CUR.choice)}};
+async function thumbOf(im){return fitCanvas(im,240).toDataURL('image/jpeg',.7)}
+async function where(sec,id){const x=spOf(sec,id);if(x&&x.rare||school())return null;
+  if(LS.get('nf_geo')===null){const ok=confirm("Noter l'endroit de ta découverte dans ton carnet ?\nLa position reste sur ton téléphone.");LS.set('nf_geo',ok?'1':'0')}
+  if(LS.get('nf_geo')!=='1'||!navigator.geolocation)return null;
+  return new Promise(ok=>navigator.geolocation.getCurrentPosition(p=>ok({lat:+p.coords.latitude.toFixed(4),lon:+p.coords.longitude.toFixed(4)}),()=>ok(null),{timeout:6000,maximumAge:60000}))}
+$('#bSave').onclick=async()=>{if(!CUR)return;if(!CUR.choice){showWrong();toast("Choisis d'abord ce que c'est");return}
+  if(!CUR.sure&&!confirm(`C'est bien « ${nameOf(CUR.sec,CUR.choice)} » ?`)){showWrong();return}
+  const im=await loadImg(CUR.url);await dbAdd('disc',{sec:CUR.sec,sp:CUR.choice,date:Date.now(),thumb:await thumbOf(im),pos:await where(CUR.sec,CUR.choice)});toast('Gardé dans ton carnet ✔')};
+$('#bTeach').onclick=async()=>{if(!CUR)return;if(!CUR.choice){showWrong();toast("Choisis d'abord ce que c'est");return}
+  if(!CUR.sure&&!confirm(`Apprendre à l'app que c'est « ${nameOf(CUR.sec,CUR.choice)} » ?`))return;
+  try{await addLearn(CUR.sec,CUR.choice,CUR.file,CUR.q);toast("Māuruuru ! L'app apprend de cette photo ✔")}catch(e){toast("Impossible : "+(e.message||e))}};
+
+/* ---------- Fiche ---------- */
+async function openFiche(sec,id){
+  const x=spOf(sec,id);if(!x)return;const s=SECTIONS[sec];
+  $('#fT').textContent=s.e+' Fiche';$('#fName').textContent=x.ta||x.fr;$('#fFr').textContent=x.ta?x.fr:'';$('#fSci').textContent=x.sci||'';
+  $('#fWarn').classList.toggle('hide',!x.warn);$('#fWarn').textContent=x.warn?'⚠ '+x.warn:'';
+  $('#fSignal').classList.toggle('hide',!x.signal);
+  $('#fDanger').innerHTML=dangerHtml(x)+(x.danger?'<br>Urgence : appelle le 15 (SAMU).':'');$('#fDanger').classList.toggle('hide',!x.danger);
+  $('#fMap').onclick=()=>openMap(sec,id);
+  $('#fInfo').innerHTML=(x.info||[]).map(([a,b])=>`<tr><td>${esc(a)}</td><td>${esc(b)}</td></tr>`).join('');
+  const sim=(x.similar||[]).map(i=>spOf(sec,i)).filter(Boolean);
+  $('#fSim').classList.toggle('hide',!sim.length);
+  $('#fSimList').innerHTML=sim.map(y=>`<button class="sp" data-cmp="${y.id}"><span class="em">⚖️</span><span><b>${esc(y.ta||y.fr)}</b><i>Comparer côte à côte</i></span><span class="chev">›</span></button>`).join('');
+  document.querySelectorAll('#fSimList [data-cmp]').forEach(b=>b.onclick=()=>openCmp(sec,id,b.dataset.cmp));
+  const refs=await loadRefs(sec);const n=refs.items.filter(i=>i.c===id).length;const mine=(await mineRefs(sec)).filter(m=>m.c===id);
+  $('#fCount').textContent=n?`${n} photo${n>1?'s':''} pour apprendre (dont ${mine.length} sur ce téléphone).`:"Aucune photo pour l'instant : aide l'app à reconnaître cette espèce !";
+  $('#fThumbs').innerHTML=mine.slice(-8).map(m=>`<img src="${m.thumb}" alt="">`).join('');
+  $('#fLearn').onclick=()=>openLearn(sec,id);
+  $('#fCmp').onclick=()=>openCmp(sec,id,(x.similar||[])[0]);
+  $('#fSignalGo').onclick=()=>signal(sec,id);
+  go('fiche');
+}
+async function signal(sec,id){const x=spOf(sec,id);const pos=await new Promise(ok=>{if(!navigator.geolocation)return ok(null);navigator.geolocation.getCurrentPosition(p=>ok(p.coords),()=>ok(null),{timeout:8000})});
+  const txt=`Signalement d'espèce envahissante (Natura Fenua)\nEspèce : ${fullName(x)} – ${x.sci}\nDate : ${new Date().toLocaleString('fr-FR')}\n`+(pos?`Position : ${pos.latitude.toFixed(5)}, ${pos.longitude.toFixed(5)}\nCarte : https://maps.google.com/?q=${pos.latitude},${pos.longitude}\n`:'Position : (à préciser)\n')+`Remarques : `;
+  try{if(native&&plug('Share'))await plug('Share').share({title:'Signalement',text:txt});else if(navigator.share)await navigator.share({title:'Signalement',text:txt});else{await navigator.clipboard.writeText(txt);toast('Texte copié : colle-le dans un message ou un e-mail')}}catch(e){}}
+
+/* ---------- Comparer ---------- */
+function openCmp(sec,a,b){
+  $('#cSec').innerHTML=Object.entries(SECTIONS).map(([k,s])=>`<option value="${k}">${s.e} ${s.t}</option>`).join('');
+  $('#cSec').value=sec||SEC;fillCmp(a,b);go('cmp')}
+function fillCmp(a,b){const L=DATA[$('#cSec').value]||[];const opts=L.map(x=>`<option value="${x.id}">${esc(fullName(x))}</option>`).join('');
+  $('#cA').innerHTML=opts;$('#cB').innerHTML=opts;$('#cA').value=a||(L[0]&&L[0].id);$('#cB').value=b&&b!==$('#cA').value?b:(L.find(x=>x.id!==$('#cA').value)||{}).id;drawCmp()}
+async function drawCmp(){const sec=$('#cSec').value,A=spOf(sec,$('#cA').value),B=spOf(sec,$('#cB').value);if(!A||!B){$('#cTab').innerHTML='';return}
+  const mine=await mineRefs(sec);const th=id=>{const m=mine.filter(x=>x.c===id).pop();return m?`<img src="${m.thumb}" alt="" style="width:100%;aspect-ratio:1;object-fit:cover;border-radius:10px">`:`<div style="font-size:32px">${SECTIONS[sec].e}</div>`};
+  const keys=[...new Set([...(A.info||[]),...(B.info||[])].map(r=>r[0]))];const get=(x,k)=>((x.info||[]).find(r=>r[0]===k)||[])[1]||'—';
+  const rows=[['',th(A.id),th(B.id),1],['Nom français',esc(A.fr),esc(B.fr)],['Nom scientifique',`<i>${esc(A.sci)}</i>`,`<i>${esc(B.sci)}</i>`]]
+    .concat(keys.map(k=>[esc(k),esc(get(A,k)),esc(get(B,k)),0,get(A,k)!==get(B,k)]))
+    .concat([['Danger',A.danger?'<span class="dbadge">☠</span> '+esc(A.danger):'—',B.danger?'<span class="dbadge">☠</span> '+esc(B.danger):'—',0,(A.danger||'')!==(B.danger||'')]])
+    .concat([['Attention',A.warn?'⚠ '+esc(A.warn):'—',B.warn?'⚠ '+esc(B.warn):'—',0,(A.warn||'')!==(B.warn||'')]]);
+  $('#cTab').innerHTML=`<tr><td></td><th>${esc(A.ta||A.fr)}</th><th>${esc(B.ta||B.fr)}</th></tr>`+rows.map(r=>`<tr class="${r[4]?'diff':''}"><td>${r[0]}</td><td>${r[1]}</td><td>${r[2]}</td></tr>`).join('')}
+$('#cSec').onchange=()=>fillCmp();$('#cA').onchange=drawCmp;$('#cB').onchange=drawCmp;
+$('#bCmp').onclick=()=>SEC==='plantes'?openCmp('plantes','taro','ape'):openCmp(SEC);
+
+/* ---------- Espèces dangereuses ---------- */
+function openDanger(){const L=[];for(const[k,s]of Object.entries(SECTIONS))(DATA[k]||[]).filter(x=>x.danger).forEach(x=>L.push([k,s,x]));
+  $('#dangerList').innerHTML=L.map(([k,s,x])=>`<button class="sp isdanger" data-sec="${k}" data-id="${x.id}"><span class="em">${s.e}</span><span style="flex:1"><b>${esc(x.ta||x.fr)}</b><i>${esc(x.danger)}</i></span><span class="chev">›</span></button>`).join('');
+  document.querySelectorAll('#dangerList [data-id]').forEach(b=>b.onclick=()=>openFiche(b.dataset.sec,b.dataset.id));go('dangerV')}
+$('#bDanger').onclick=openDanger;
+
+/* ---------- Carte de Tahiti ---------- */
+let MAP=null,LAYER=null,ADDING=false,MK=null,mapFocus=null;
+const SECCOL={nuages:'#5b7fa6',plantes:'#2f7d3b',oiseaux:'#0f6e6b',insectes:'#a16207',champignons:'#7c3aed'};
+async function initMap(){
+  if(MAP)return;if(!window.L){$('#mapSt').textContent='Carte indisponible.';return}
+  MAP=L.map('mapEl',{zoomControl:true,attributionControl:true}).setView([-17.65,-149.43],10);
+  try{const g=await(await fetch('vendor/tahiti.geojson')).json();L.geoJSON(g,{style:{color:'#1f5c3a',weight:1,fillColor:'#cfe2b8',fillOpacity:.9},interactive:false}).addTo(MAP)}catch(e){}
+  const tiles=L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:18,attribution:'© OpenStreetMap'});
+  let tileErr=0;tiles.on('tileerror',()=>{if(++tileErr===3)$('#mapSt').textContent='Sans réseau : carte simplifiée. Tes repères restent visibles.'});tiles.addTo(MAP);
+  LAYER=L.layerGroup().addTo(MAP);
+  MAP.on('click',e=>{if(ADDING)newMark(e.latlng)});
+}
+async function openMap(sec,id){go('mapV');mapFocus=sec&&id?{sec,id}:null;
+  const opts=['<option value="">Tout afficher</option>'].concat(Object.entries(SECTIONS).map(([k,s])=>`<option value="${k}">${s.e} ${s.t}</option>`));
+  if(mapFocus)opts.push(`<option value="sp:${sec}:${id}">${SECTIONS[sec].e} ${esc(nameOf(sec,id))} seulement</option>`);
+  $('#mFilter').innerHTML=opts.join('');$('#mFilter').value=mapFocus?`sp:${sec}:${id}`:'';
+  await initMap();setTimeout(()=>MAP&&MAP.invalidateSize(),150);await drawMarks();
+  if(mapFocus){const x=spOf(sec,id);if(x&&x.rare){$('#mapSt').textContent="Espèce rare : l'app ne place pas de repère pour la protéger.";}else{setAdding(true)}}}
+function setAdding(on){ADDING=on;$('#mapV').classList.toggle('adding',on);$('#mAdd').textContent=on?'✖ Annuler':'➕ Ajouter un repère';
+  $('#mapSt').textContent=on?'Touche la carte à l\'endroit où tu as vu l\'espèce (ou « Ma position »).':''}
+async function drawMarks(){if(!LAYER)return;LAYER.clearLayers();const f=$('#mFilter').value;
+  const keep=m=>!f||(f.startsWith('sp:')?`sp:${m.sec}:${m.sp}`===f:m.sec===f);
+  const marks=(await dbAll('marks').catch(()=>[])).map(m=>({...m,kind:'mark'}));
+  const disc=(await dbAll('disc').catch(()=>[])).filter(d=>d.pos&&d.sp&&d.sp!==OTHER).map(d=>({...d,lat:d.pos.lat,lon:d.pos.lon,kind:'disc'}));
+  const all=marks.concat(disc).filter(keep);const pts=[];
+  for(const m of all){const x=spOf(m.sec,m.sp);if(x&&x.rare)continue;const dg=x&&x.danger;
+    const c=L.circleMarker([m.lat,m.lon],{radius:dg?10:8,color:'#fff',weight:2,fillColor:dg?'#b91c1c':(SECCOL[m.sec]||'#333'),fillOpacity:1}).addTo(LAYER);
+    c.bindPopup(`<b>${dg?'☠ ':''}${esc(nameOf(m.sec,m.sp))}</b><br><span class="muted">${new Date(m.date).toLocaleDateString('fr-FR')}${m.kind==='disc'?' · découverte':''}</span>${m.note?'<br>'+esc(m.note):''}<button class="btn alt" data-pf="${m.sec}|${m.sp}">Voir la fiche</button>${m.kind==='mark'?`<button class="btn alt" data-pd="${m.id}">🗑 Supprimer</button>`:''}`);
+    pts.push([m.lat,m.lon])}
+  $('#mapSub').textContent=`${all.length} repère${all.length>1?'s':''} · restent sur ton téléphone`;
+  if(pts.length&&!ADDING)MAP.fitBounds(pts,{maxZoom:14,padding:[30,30]})}
+document.addEventListener('click',async e=>{const pf=e.target.closest('[data-pf]'),pd=e.target.closest('[data-pd]');
+  if(pf){const[sec,id]=pf.dataset.pf.split('|');openFiche(sec,id)}
+  if(pd){if(confirm('Supprimer ce repère ?')){await dbDel('marks',+pd.dataset.pd);MAP.closePopup();drawMarks()}}});
+$('#mFilter').onchange=drawMarks;
+$('#mAdd').onclick=()=>setAdding(!ADDING);
+$('#mMe').onclick=()=>{if(!navigator.geolocation){toast('Position indisponible');return}$('#mapSt').textContent='Recherche de ta position…';
+  navigator.geolocation.getCurrentPosition(p=>{const ll=L.latLng(p.coords.latitude,p.coords.longitude);MAP.setView(ll,15);$('#mapSt').textContent='';if(ADDING)newMark(ll)},()=>{$('#mapSt').textContent='Position introuvable (GPS désactivé ?).'},{timeout:10000,enableHighAccuracy:true})};
+function newMark(ll){MK={lat:+ll.lat.toFixed(5),lon:+ll.lng.toFixed(5)};
+  $('#mkWhere').textContent=`Position : ${MK.lat.toFixed(4)}, ${MK.lon.toFixed(4)}`;
+  $('#mkSec').innerHTML=Object.entries(SECTIONS).map(([k,s])=>`<option value="${k}">${s.e} ${s.t}</option>`).join('');
+  $('#mkSec').value=mapFocus?mapFocus.sec:(($('#mFilter').value.match(/^[a-z]+$/)||[SEC])[0]);fillMk(mapFocus&&mapFocus.id);$('#mkNote').value='';
+  $('#markSheet').classList.add('on')}
+function fillMk(sel){$('#mkSp').innerHTML=(DATA[$('#mkSec').value]||[]).map(x=>`<option value="${x.id}">${x.danger?'☠ ':''}${esc(fullName(x))}</option>`).join('');if(sel)$('#mkSp').value=sel;checkRare()}
+function checkRare(){const x=spOf($('#mkSec').value,$('#mkSp').value);const r=x&&x.rare;$('#mkRare').classList.toggle('hide',!r);$('#mkRare').textContent=r?"Espèce rare et protégée : pour la protéger, l'app ne garde pas d'endroit. Merci de ne pas le partager.":'';$('#mkSave').disabled=!!r}
+$('#mkSec').onchange=()=>fillMk();$('#mkSp').onchange=checkRare;
+$('#mkCancel').onclick=()=>$('#markSheet').classList.remove('on');
+$('#mkSave').onclick=async()=>{if(!MK)return;await dbAdd('marks',{...MK,sec:$('#mkSec').value,sp:$('#mkSp').value,note:$('#mkNote').value.trim(),date:Date.now()});
+  $('#markSheet').classList.remove('on');setAdding(false);await drawMarks();toast('Repère enregistré ✔')};
+$('#bMap').onclick=()=>openMap();
+
+/* ---------- Apprendre ---------- */
+async function addLearn(sec,sp,file,q){
+  const url=URL.createObjectURL(file);const im=await loadImg(url);
+  const blob=await new Promise(r=>fitCanvas(im,1024).toBlob(r,'image/jpeg',.85));
+  let emb=null;try{emb=(q||await embedImage(im)).buffer.slice(0)}catch(e){console.warn('emb',e)}
+  await dbAdd('learn',{sec,sp,date:Date.now(),blob,thumb:await thumbOf(im),emb,model:EMB_FILE,v:2});URL.revokeObjectURL(url);delete MINE[sec];
+}
+function fillLearnSp(sel){const sec=$('#lSec').value;$('#lSp').innerHTML=(DATA[sec]||[]).map(x=>`<option value="${x.id}">${esc(fullName(x))}</option>`).join('')+`<option value="${OTHER}">« Rien de tout ça » (fond, autres choses)</option>`;if(sel)$('#lSp').value=sel;learnCount()}
+async function learnCount(){const sec=$('#lSec').value,sp=$('#lSp').value;const all=await dbAll('learn');const n=all.filter(x=>x.sec===sec&&x.sp===sp).length;const r=await repoRefs(sec);const tot=n+(r.counts[sp]||0);
+  $('#lCount').textContent=`${tot} / 30 photos pour cette espèce (${n} sur ce téléphone)`;$('#lGoal b').style.width=Math.min(100,Math.round(tot/30*100))+'%'}
+function openLearn(sec,sp){$('#lSec').innerHTML=Object.entries(SECTIONS).map(([k,s])=>`<option value="${k}">${s.e} ${s.t}</option>`).join('');$('#lSec').value=sec||SEC;fillLearnSp(sp);$('#lSt').textContent='';$('#lZipSt').textContent='';$('#lName').value=LS.get('nf_name')||'';go('learn')}
+$('#lSec').onchange=()=>fillLearnSp();$('#lSp').onchange=learnCount;
+$('#lShoot').onclick=()=>$('#fLShoot').click();$('#lPick').onclick=()=>$('#fLPick').click();
+async function learnFiles(files){const sec=$('#lSec').value,sp=$('#lSp').value;const P=$('#lProg');P.style.display='block';
+  let ok=0;for(let i=0;i<files.length;i++){$('#lSt').textContent=`Apprentissage… ${i+1} / ${files.length}`;P.firstElementChild.style.width=Math.round(i/files.length*100)+'%';
+    try{await addLearn(sec,sp,files[i]);ok++}catch(e){console.warn(e)}}
+  P.firstElementChild.style.width='100%';setTimeout(()=>P.style.display='none',600);
+  $('#lSt').textContent=`${ok} photo${ok>1?'s':''} ajoutée${ok>1?'s':''} pour « ${nameOf(sec,sp)} » ✔ Māuruuru !`;learnCount();
+  if(!EMB)$('#lSt').textContent+=" (l'IA n'a pas pu se charger : les photos sont gardées pour l'export)"}
+$('#fLShoot').onchange=e=>{const f=[...e.target.files];e.target.value='';if(f.length)learnFiles(f).then(()=>$('#lShoot').textContent='📷 Encore une')};
+$('#fLPick').onchange=e=>{const f=[...e.target.files];e.target.value='';if(f.length)learnFiles(f)};
+
+/* ---------- ZIP (sans compression : les photos sont déjà compressées) ---------- */
+const CRC=(()=>{const t=new Uint32Array(256);for(let n=0;n<256;n++){let c=n;for(let k=0;k<8;k++)c=c&1?0xEDB88320^(c>>>1):c>>>1;t[n]=c>>>0}return t})();
+const crc32=d=>{let c=0xFFFFFFFF;for(let i=0;i<d.length;i++)c=CRC[(c^d[i])&255]^(c>>>8);return(c^0xFFFFFFFF)>>>0};
+function makeZip(files){const enc=new TextEncoder(),parts=[],cen=[];let off=0;
+  for(const f of files){const name=enc.encode(f.name),d=f.data,crc=crc32(d);
+    const h=new DataView(new ArrayBuffer(30));h.setUint32(0,0x04034b50,true);h.setUint16(4,20,true);h.setUint16(6,0x0800,true);h.setUint32(14,crc,true);h.setUint32(18,d.length,true);h.setUint32(22,d.length,true);h.setUint16(26,name.length,true);
+    parts.push(h.buffer,name,d);
+    const c=new DataView(new ArrayBuffer(46));c.setUint32(0,0x02014b50,true);c.setUint16(4,20,true);c.setUint16(6,20,true);c.setUint16(8,0x0800,true);c.setUint32(16,crc,true);c.setUint32(20,d.length,true);c.setUint32(24,d.length,true);c.setUint16(28,name.length,true);c.setUint32(42,off,true);
+    cen.push(c.buffer,name);off+=30+name.length+d.length}
+  const cs=cen.reduce((a,b)=>a+(b.byteLength||b.length),0);const e=new DataView(new ArrayBuffer(22));e.setUint32(0,0x06054b50,true);e.setUint16(8,files.length,true);e.setUint16(10,files.length,true);e.setUint32(12,cs,true);e.setUint32(16,off,true);
+  return new Blob([...parts,...cen,e.buffer],{type:'application/zip'})}
+const b64=blob=>new Promise((r,j)=>{const f=new FileReader();f.onload=()=>r(String(f.result).split(',')[1]);f.onerror=j;f.readAsDataURL(blob)});
+async function writeBlob(b,path,dir){const FS=plug('Filesystem');if(!FS)throw new Error('module fichiers absent');const CH=3<<20;
+  for(let o=0;o<Math.max(1,b.size);o+=CH){const d=await b64(b.slice(o,o+CH));if(o===0)await FS.writeFile({path,data:d,directory:dir,recursive:true});else await FS.appendFile({path,data:d,directory:dir})}
+  return(await FS.getUri({path,directory:dir})).uri}
+async function shareBlob(b,name){
+  if(native){const uri=await writeBlob(b,'NaturaFenua/'+name,'CACHE');await plug('Share').share({title:'Natura Fenua',files:[uri]});return}
+  const f=new File([b],name,{type:b.type});
+  if(navigator.canShare&&navigator.canShare({files:[f]}))await navigator.share({files:[f],title:'Natura Fenua'});
+  else{const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download=name;a.click();toast('Fichier téléchargé')}
+}
+$('#lZip').onclick=async()=>{if(school()){$('#lZipSt').textContent="L'export est désactivé en mode école.";return}if(!$('#lOk').checked){$('#lZipSt').textContent="Coche d'abord la case pour confirmer que tu peux partager ces photos.";return}
+  const all=(await dbAll('learn')).filter(x=>x.blob);if(!all.length){$('#lZipSt').textContent="Aucune photo à exporter pour l'instant.";return}
+  const who=$('#lName').value.trim();LS.set('nf_name',who);
+  $('#lZipSt').textContent='Préparation du fichier…';const files=[];const idx={};
+  for(const x of all){const k=x.sec+'/'+x.sp;idx[k]=(idx[k]||0)+1;const d=new Date(x.date).toISOString().slice(0,10);
+    files.push({name:`photos/${x.sec}/${x.sp}/${x.sp}_${d}_${x.id}.jpg`,data:new Uint8Array(await x.blob.arrayBuffer())})}
+  const list=Object.entries(idx).map(([k,n])=>`${k} : ${n} photo(s)`).join('\n');
+  files.push({name:'LISEZMOI.txt',data:new TextEncoder().encode(`Natura Fenua — photos d'apprentissage\nDate : ${new Date().toLocaleString('fr-FR')}\nPhotographe : ${who||'(anonyme)'}\nLicence : CC BY (accord donné dans l'app : photos personnelles, sans visages)\n\n${list}\n\nÀ mettre dans le dossier « photos » du dépôt natura-fenua.\n`)});
+  const zip=makeZip(files);const name=`natura-fenua-photos-${new Date().toISOString().slice(0,10)}.zip`;
+  try{await shareBlob(zip,name);$('#lZipSt').textContent=`Fichier prêt : ${all.length} photos (${(zip.size/1048576).toFixed(1)} Mo) ✔ Māuruuru !`}catch(e){$('#lZipSt').textContent='Partage annulé ou impossible : '+(e.message||e)}};
+
+/* ---------- Chant d'oiseau ---------- */
+let rec=null;
+$('#bSong').onclick=async()=>{
+  if(rec){rec.stop();return}
+  try{const st=await navigator.mediaDevices.getUserMedia({audio:true});const ch=[];rec=new MediaRecorder(st);
+    rec.ondataavailable=e=>ch.push(e.data);
+    rec.onstop=async()=>{st.getTracks().forEach(t=>t.stop());clearTimeout(rec._t);rec=null;$('#bSong').textContent='🎤 Enregistrer un chant (reconnaissance bientôt)';$('#bSong').classList.remove('rec');
+      const blob=new Blob(ch,{type:ch[0]&&ch[0].type||'audio/webm'});
+      await dbAdd('disc',{sec:'oiseaux',sp:null,date:Date.now(),audio:blob,pos:null});
+      toast("Chant gardé dans ton carnet ✔")};
+    rec.start();rec._t=setTimeout(()=>rec&&rec.stop(),15000);$('#bSong').textContent='⏹ Arrêter (15 s max)';$('#bSong').classList.add('rec')}
+  catch(e){toast("Micro non disponible : "+(e.message||e))}};
+
+/* ---------- Carnet ---------- */
+async function renderDisc(){const d=(await dbAll('disc')).sort((a,b)=>b.date-a.date);$('#discEmpty').classList.toggle('hide',d.length>0);
+  const found={};d.forEach(x=>{if(x.sp&&x.sp!==OTHER)(found[x.sec]=found[x.sec]||new Set()).add(x.sp)});
+  $('#discStats').innerHTML=d.length?`<div class="card"><h3>Ma collection</h3>${Object.entries(SECTIONS).map(([k,s])=>`<div>${s.e} ${s.t} : <b>${found[k]?found[k].size:0}</b> / ${(DATA[k]||[]).length}</div>`).join('')}</div>`:'';
+  const n=d.filter(x=>x.sp&&x.sp!==OTHER).length,secs=Object.keys(found).length,trees=found.plantes?found.plantes.size:0;
+  const B=[['☁️','Premier nuage',!!found.nuages],['🌺','5 plantes du fenua',trees>=5],['🐦','Ami des oiseaux',d.some(x=>x.audio)],['🧭','Explorateur (3 catégories)',secs>=3],['📒','10 découvertes',n>=10],['🌿','Gardien du fenua (espèce envahissante)',d.some(x=>{const y=spOf(x.sec,x.sp);return y&&y.signal})]];
+  $('#badges').innerHTML=d.length?`<div class="card"><h3>Mes badges</h3>${B.map(([e,t,ok])=>`<span class="badge ${ok?'':'off'}">${e} ${t}</span>`).join('')}</div>`:'';
+  $('#discPrint').classList.toggle('hide',!d.length);
+  $('#discList').innerHTML=d.map(x=>{const s=SECTIONS[x.sec]||{e:'•'};const nm=x.sp?nameOf(x.sec,x.sp):(x.audio?"Chant d'oiseau":'?');
+    return `<div class="sp" data-id="${x.id}"><span class="em">${x.thumb?`<img src="${x.thumb}" alt="">`:s.e}</span><span style="flex:1"><b>${esc(nm)}</b><i>${new Date(x.date).toLocaleString('fr-FR',{dateStyle:'medium',timeStyle:'short'})}${x.pos?' · 📍':''}</i>${x.audio?'<br><audio controls preload="none"></audio>':''}</span>${x.thumb&&x.sp?`<button class="ib" data-share="${x.id}" aria-label="Partager">📤</button>`:''}<button class="ib" data-del="${x.id}" aria-label="Supprimer">🗑</button></div>`}).join('');
+  document.querySelectorAll('#discList [data-share]').forEach(b=>b.onclick=e=>{e.stopPropagation();shareDisc(d.find(y=>y.id==b.dataset.share))});
+  d.forEach(x=>{if(x.audio){const a=document.querySelector(`[data-id="${x.id}"] audio`);if(a)a.src=URL.createObjectURL(x.audio)}});
+  document.querySelectorAll('#discList [data-del]').forEach(b=>b.onclick=async e=>{e.stopPropagation();if(confirmDel(b)){await dbDel('disc',+b.dataset.del);renderDisc()}});
+  document.querySelectorAll('#discList .sp').forEach(el=>el.onclick=()=>{const x=d.find(y=>y.id==el.dataset.id);if(x&&x.sp&&x.sp!==OTHER)openFiche(x.sec,x.sp)})}
+/* Carte de partage : photo + noms, jamais la position. */
+async function shareDisc(x){const y=spOf(x.sec,x.sp)||{fr:x.sp};const W=720,H=900,c=document.createElement('canvas');c.width=W;c.height=H;const g=c.getContext('2d');
+  g.fillStyle='#f5f1e6';g.fillRect(0,0,W,H);const im=await loadImg(x.thumb);const s=Math.min(im.width,im.height);g.drawImage(im,(im.width-s)/2,(im.height-s)/2,s,s,40,40,640,640);
+  g.fillStyle='#1d2a22';g.font='bold 44px system-ui,sans-serif';g.fillText(y.ta||y.fr,40,740);g.font='30px system-ui,sans-serif';g.fillStyle='#56645b';g.fillText((y.ta?y.fr+' · ':'')+(y.sci||''),40,790,640);
+  g.fillStyle='#1f5c3a';g.font='bold 28px system-ui,sans-serif';g.fillText('Natura Fenua · '+new Date(x.date).toLocaleDateString('fr-FR'),40,860);
+  const blob=await new Promise(r=>c.toBlob(r,'image/jpeg',.88));try{await shareBlob(blob,`natura-fenua-${x.sp}.jpg`)}catch(e){}}
+$('#discPrint').onclick=()=>window.print();
+function confirmDel(b){if(b.dataset.armed)return true;b.dataset.armed=1;b.textContent='✔?';toast('Touche encore pour supprimer');setTimeout(()=>{delete b.dataset.armed;b.textContent='🗑'},3000);return false}
+$('#bDisc').onclick=()=>{go('disc');renderDisc()};
+$('#discFirst').onclick=()=>history.back();
+$('#bLearn').onclick=()=>openLearn(SEC);
+
+/* ---------- Mises à jour ---------- */
+let BUILD=0,upd=null;
+const newer=(a,b)=>{const x=String(a).split('.').map(Number),y=String(b).split('.').map(Number);for(let i=0;i<3;i++){if((x[i]||0)!==(y[i]||0))return(x[i]||0)>(y[i]||0)}return false};
+function verText(){$('#ver').textContent=`Version ${APP_VERSION}`+(BUILD?` · build ${BUILD}`:'')+(native?' · app Android':' · version web')}
+async function checkUpdate(manual){
+  const st=$('#upSt'),g=$('#upGo');if(manual)st.textContent='Recherche en cours…';
+  try{
+    if(native){const rr=await fetch(`https://api.github.com/repos/${REPO}/releases/latest`,{cache:'no-store'});if(!rr.ok)throw new Error('github '+rr.status);const j=await rr.json();
+      const nb=parseInt(String(j.tag_name||'').replace(/\D/g,''))||0;
+      if(nb>BUILD){const a=(j.assets||[]).find(a=>/\.apk$/.test(a.name));upd={url:a?a.browser_download_url:j.html_url,size:a&&a.size,txt:`Nouvelle version disponible : ${j.name||j.tag_name}.`}}else upd=null}
+    else{const j=await(await fetch('version.json?t='+Date.now(),{cache:'no-store'})).json();upd=newer(j.version,APP_VERSION)?{web:1,v:j.version,txt:`Nouvelle version ${j.version} disponible.`+(j.notes?' '+j.notes:'')}:null}
+    $('#bAbout').classList.toggle('has',!!upd);g.classList.toggle('hide',!upd);$('#upBanner').classList.toggle('hide',!upd);
+    if(upd){const mo=upd.size?` (${(upd.size/1048576).toFixed(0)} Mo)`:'';st.textContent=upd.txt+mo;$('#upBannerT').textContent=(upd.web?'Quelques secondes':'Téléchargement'+mo)+' · conseil : utilise le wifi';
+      g.textContent=upd.web?'Mettre à jour maintenant':'Télécharger la mise à jour'+mo;if(upd.url)g.href=upd.url}
+    else if(manual)st.textContent='Tu as déjà la dernière version ✔';
+  }catch(e){if(manual)st.textContent="Impossible de vérifier pour l'instant (pas de réseau ?). Réessaie plus tard."}
+}
+const upBar=(p,ind)=>{const P=$('#upProg');P.style.display='block';P.classList.toggle('ind',!!ind);if(!ind)P.firstElementChild.style.width=Math.round(p*100)+'%'};
+let upBusy=false;
+async function doUpdate(){
+  if(!upd||upBusy)return;upBusy=true;const st=$('#upSt'),g=$('#upGo');g.classList.add('hide');
+  if(upd.web){try{for(const k of await caches.keys())await caches.delete(k);for(const r of await navigator.serviceWorker.getRegistrations())await r.update().catch(()=>{})}catch(err){}
+    st.textContent='Mise à jour installée ✔ Redémarrage…';setTimeout(()=>location.reload(),700);return}
+  const FS=plug('Filesystem'),FO=plug('FileOpener');
+  if(!FS||!FS.downloadFile||!FO){location.href=upd.url;upBusy=false;return}
+  let h=null;
+  try{st.textContent='Téléchargement de la mise à jour…';upBar(0,true);
+    h=await FS.addListener('progress',p=>{const mb=(p.bytes/1048576).toFixed(1).replace('.',',');const tot=p.contentLength>0?p.contentLength:upd.size;
+      if(tot>0){const v=Math.min(1,p.bytes/tot);upBar(v);st.textContent=`Téléchargement… ${Math.round(v*100)} % (${mb} Mo)`}else{upBar(0,true);st.textContent=`Téléchargement… ${mb} Mo`}});
+    const r=await FS.downloadFile({url:upd.url,path:'update/'+APK,directory:'CACHE',progress:true,recursive:true});
+    upBar(1);st.textContent="Téléchargement terminé ✔ Android va te demander de confirmer l'installation.";
+    let path=r.path;if(!path){const u=await FS.getUri({path:'update/'+APK,directory:'CACHE'});path=u.uri}
+    await FO.open({filePath:path,contentType:'application/vnd.android.package-archive',openWithDefault:true});
+  }catch(err){st.textContent="Le téléchargement a été interrompu (réseau ?).";g.textContent='🔁 Réessayer';g.classList.remove('hide');$('#upProg').style.display='none'}
+  finally{if(h&&h.remove)h.remove();upBusy=false}
+}
+$('#upGo').addEventListener('click',e=>{e.preventDefault();doUpdate()});
+$('#upBannerGo').onclick=()=>{openAbout(false);doUpdate()};
+$('#apkDl').href=`https://github.com/${REPO}/releases/latest/download/${APK}`;
+if(native)$('#apkDl').classList.add('hide');
+function openAbout(check=true){verText();$('#about').classList.add('on');history.pushState({m:1},'');if(check)checkUpdate(true)}
+$('#bAbout').onclick=()=>openAbout(!upd);
+$('#upCheck').onclick=()=>checkUpdate(true);
+$('#aboutClose').onclick=()=>history.back();
+$('#about').onclick=e=>{if(e.target.id==='about')history.back()};
+$('#bTuto').onclick=()=>{$('#about').classList.remove('on');showWelcome()};
+if(!native&&'serviceWorker' in navigator&&location.protocol==='https:')navigator.serviceWorker.register('sw.js').catch(()=>{});
+
+/* ---------- Mode démo ---------- */
+function setDemo(on){DEMO.on=on;LS.set('nf_demo',on?'1':'0');if(on)demoData();else{DEMO.disc=[];DEMO.marks=[]}
+  $('#demoBar').classList.toggle('hide',!on);$('#demoMode').checked=on;renderHome();if(document.querySelector('#sec.on'))renderSec()}
+$('#demoMode').onchange=e=>{setDemo(e.target.checked);toast(e.target.checked?'Mode démo activé':'Mode démo désactivé')};
+$('#demoExit').onclick=()=>{setDemo(false);toast('Mode démo désactivé')};
+document.addEventListener('click',e=>{if(e.target.id==='wDemo'){endWelcome();setDemo(true);toast('Mode démo : explore librement !')}});
+
+/* ---------- Mode école, défi du jour, hors ligne ---------- */
+const school=()=>LS.get('nf_school')==='1';
+function applySchool(){const on=school();$('#schoolMode').checked=on;$('#bLearn').classList.toggle('hide',on);$('#bTeach').classList.toggle('hide',on);$('#fLearn').classList.toggle('hide',on);$('#secHelp').classList.toggle('hide',on);
+  const c=$('#dayChal');if(!on){c.classList.add('hide');return}
+  const d=new Date();const seed=d.getFullYear()*400+d.getMonth()*32+d.getDate();const pick=(a,n)=>a[(seed*7+n*13)%a.length];
+  const cl=pick(DATA.nuages||[],1),pl=pick((DATA.plantes||[]).filter(x=>!x.danger&&!x.signal),2),oi=pick((DATA.oiseaux||[]).filter(x=>!x.rare),3);
+  c.innerHTML=`<b>🎯 Défi du jour</b><br>Trouve : ${esc(cl?cl.fr:'un nuage')}, ${esc(pl?(pl.ta||pl.fr):'une plante')}, ${esc(oi?(oi.ta||oi.fr):'un oiseau')}.`;c.classList.remove('hide')}
+$('#schoolMode').onchange=e=>{LS.set('nf_school',e.target.checked?'1':'0');applySchool();toast(e.target.checked?'Mode école activé':'Mode école désactivé')};
+async function offlineState(){const P=$('#offPill');
+  if(native){P.textContent='✔ Prête hors ligne';P.className='pill ok';return}
+  let ok=false;try{ok=!!(await caches.match(EMB_URL))}catch(e){}
+  P.textContent=ok?'✔ Prête hors ligne':'⏳ Il faut du réseau une seule fois (25 Mo, en wifi de préférence)';P.className='pill'+(ok?' ok':'')}
+
+/* ---------- Démarrage ---------- */
+(async()=>{
+  history.replaceState({v:'home'},'');
+  try{await openDB()}catch(e){toast('Stockage local indisponible')}
+  try{DATA=await(await fetch('data.json',{cache:'no-cache'})).json()}catch(e){toast('Fiches introuvables');DATA={}}
+  $('#credits').textContent=DATA.credits&&DATA.credits.length?'Māuruuru aux photographes : '+DATA.credits.join(', '):'';
+  try{navigator.storage&&navigator.storage.persist&&navigator.storage.persist()}catch(e){}
+  if(LS.get('nf_seen'))go('home',false);else showWelcome();
+  applySchool();offlineState();if(LS.get('nf_demo')==='1')setDemo(true);
+  renderHome();
+  try{const b=await(await fetch('build.json',{cache:'no-store'})).json();BUILD=b.build||0}catch(e){}
+  setTimeout(()=>checkUpdate(false),3000);
+  if(native)setTimeout(()=>loadEmbedder().catch(()=>{}),1500);
+})();
+</script>
+</body>
+</html>

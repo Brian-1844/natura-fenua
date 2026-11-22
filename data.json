@@ -1,0 +1,1544 @@
+{
+ "plantes": [
+  {
+   "id": "tiare",
+   "ta": "Tiare Tahiti",
+   "fr": "Tiaré, gardénia de Tahiti",
+   "sci": "Gardenia taitensis",
+   "info": [
+    [
+     "Catégorie",
+     "Fleur"
+    ],
+    [
+     "À photographier",
+     "Fleur ouverte, bouton, feuilles"
+    ],
+    [
+     "Usages",
+     "Fleur emblème, monoï, couronnes"
+    ]
+   ],
+   "similar": [
+    "tipanie"
+   ]
+  },
+  {
+   "id": "uru",
+   "ta": "ʻUru",
+   "fr": "Arbre à pain",
+   "sci": "Artocarpus altilis",
+   "info": [
+    [
+     "Catégorie",
+     "Arbre fruitier"
+    ],
+    [
+     "À photographier",
+     "Grande feuille découpée, fruit, arbre entier"
+    ],
+    [
+     "Usages",
+     "Fruit cuit (au feu, au four)"
+    ]
+   ],
+   "warn": "Latex collant"
+  },
+  {
+   "id": "haari",
+   "ta": "Haari (niu)",
+   "fr": "Cocotier",
+   "sci": "Cocos nucifera",
+   "info": [
+    [
+     "Catégorie",
+     "Palmier"
+    ],
+    [
+     "À photographier",
+     "Tronc, palmes, noix vertes et sèches"
+    ],
+    [
+     "Usages",
+     "Eau de coco, coprah, monoï, tressage"
+    ]
+   ],
+   "warn": "Chute de noix"
+  },
+  {
+   "id": "fara",
+   "ta": "Fara",
+   "fr": "Pandanus",
+   "sci": "Pandanus tectorius",
+   "info": [
+    [
+     "Catégorie",
+     "Arbre"
+    ],
+    [
+     "À photographier",
+     "Racines-échasses, feuilles, fruit"
+    ],
+    [
+     "Usages",
+     "Tressage (nattes, chapeaux), fleur hinano"
+    ]
+   ],
+   "warn": "Bords des feuilles épineux"
+  },
+  {
+   "id": "meia",
+   "ta": "Meiʻa",
+   "fr": "Bananier",
+   "sci": "Musa spp.",
+   "info": [
+    [
+     "Catégorie",
+     "Plante fruitière"
+    ],
+    [
+     "À photographier",
+     "Feuilles, régime pendant, fleur"
+    ],
+    [
+     "Usages",
+     "Fruits, feuilles pour le four tahitien"
+    ]
+   ],
+   "similar": [
+    "fei"
+   ]
+  },
+  {
+   "id": "fei",
+   "ta": "Fēʻī",
+   "fr": "Banane plantain de montagne",
+   "sci": "Musa troglodytarum",
+   "info": [
+    [
+     "Catégorie",
+     "Plante fruitière"
+    ],
+    [
+     "À photographier",
+     "Régime dressé vers le haut, fruits orange"
+    ],
+    [
+     "Usages",
+     "Fruit cuit"
+    ]
+   ],
+   "similar": [
+    "meia"
+   ]
+  },
+  {
+   "id": "taro",
+   "ta": "Taro",
+   "fr": "Taro",
+   "sci": "Colocasia esculenta",
+   "info": [
+    [
+     "Catégorie",
+     "Tubercule"
+    ],
+    [
+     "À photographier",
+     "Feuille (tige attachée au milieu), plantation"
+    ],
+    [
+     "Usages",
+     "Tubercule cuit, feuilles (fāfā) cuites"
+    ]
+   ],
+   "warn": "Irritant cru",
+   "similar": [
+    "ape"
+   ]
+  },
+  {
+   "id": "ape",
+   "ta": "ʻApe",
+   "fr": "Ape, taro géant",
+   "sci": "Alocasia macrorrhizos",
+   "info": [
+    [
+     "Catégorie",
+     "Tubercule"
+    ],
+    [
+     "À photographier",
+     "Feuille géante (tige attachée au bord), tronc"
+    ],
+    [
+     "Usages",
+     "Tubercule cuit longtemps"
+    ]
+   ],
+   "warn": "Très irritant cru ; ressemble au taro",
+   "similar": [
+    "taro"
+   ]
+  },
+  {
+   "id": "nono",
+   "ta": "Nono",
+   "fr": "Noni",
+   "sci": "Morinda citrifolia",
+   "info": [
+    [
+     "Catégorie",
+     "Arbuste"
+    ],
+    [
+     "À photographier",
+     "Fruit vert à blanc, feuilles brillantes, fleurs"
+    ],
+    [
+     "Usages",
+     "Rāʻau Tahiti (médecine traditionnelle)"
+    ]
+   ],
+   "warn": "Fruit mûr très odorant"
+  },
+  {
+   "id": "auti",
+   "ta": "ʻAutī",
+   "fr": "Cordyline, ti",
+   "sci": "Cordyline fruticosa",
+   "info": [
+    [
+     "Catégorie",
+     "Arbuste"
+    ],
+    [
+     "À photographier",
+     "Feuilles vertes ou rouges, tige"
+    ],
+    [
+     "Usages",
+     "Haies, costumes de danse, emballage"
+    ]
+   ]
+  },
+  {
+   "id": "miri",
+   "ta": "Miri",
+   "fr": "Basilic",
+   "sci": "Ocimum basilicum",
+   "info": [
+    [
+     "Catégorie",
+     "Herbe aromatique"
+    ],
+    [
+     "À photographier",
+     "Feuilles, épis de fleurs"
+    ],
+    [
+     "Usages",
+     "Parfum du monoï, couronnes"
+    ]
+   ]
+  },
+  {
+   "id": "aute",
+   "ta": "ʻAute",
+   "fr": "Hibiscus",
+   "sci": "Hibiscus rosa-sinensis",
+   "info": [
+    [
+     "Catégorie",
+     "Fleur"
+    ],
+    [
+     "À photographier",
+     "Fleur (plusieurs couleurs), feuilles"
+    ],
+    [
+     "Usages",
+     "Haies, décoration, rāʻau"
+    ]
+   ]
+  },
+  {
+   "id": "purau",
+   "ta": "Pūrau",
+   "fr": "Bourao",
+   "sci": "Hibiscus tiliaceus",
+   "info": [
+    [
+     "Catégorie",
+     "Arbre"
+    ],
+    [
+     "À photographier",
+     "Fleur jaune (rouge le soir), feuille en cœur"
+    ],
+    [
+     "Usages",
+     "Fibres d'écorce, bois, rāʻau"
+    ]
+   ],
+   "warn": "Ressemble au miro",
+   "similar": [
+    "miro"
+   ]
+  },
+  {
+   "id": "tipanie",
+   "ta": "Tipanie",
+   "fr": "Frangipanier",
+   "sci": "Plumeria spp.",
+   "info": [
+    [
+     "Catégorie",
+     "Arbre à fleurs"
+    ],
+    [
+     "À photographier",
+     "Fleur, feuilles, branches épaisses"
+    ],
+    [
+     "Usages",
+     "Colliers, décoration"
+    ]
+   ],
+   "warn": "Sève blanche irritante",
+   "similar": [
+    "tiare"
+   ]
+  },
+  {
+   "id": "tamanu",
+   "ta": "Tamanu",
+   "fr": "Tamanu, calophylle",
+   "sci": "Calophyllum inophyllum",
+   "info": [
+    [
+     "Catégorie",
+     "Arbre"
+    ],
+    [
+     "À photographier",
+     "Feuilles nervurées, fruit rond, fleurs blanches"
+    ],
+    [
+     "Usages",
+     "Huile de tamanu (peau), bois"
+    ]
+   ],
+   "warn": "Fruit et amande non comestibles"
+  },
+  {
+   "id": "mape",
+   "ta": "Mape",
+   "fr": "Châtaignier tahitien",
+   "sci": "Inocarpus fagifer",
+   "info": [
+    [
+     "Catégorie",
+     "Arbre"
+    ],
+    [
+     "À photographier",
+     "Tronc à contreforts, fruit, feuilles"
+    ],
+    [
+     "Usages",
+     "Fruit cuit"
+    ]
+   ]
+  },
+  {
+   "id": "ahia",
+   "ta": "Ahiʻa",
+   "fr": "Pomme malaise",
+   "sci": "Syzygium malaccense",
+   "info": [
+    [
+     "Catégorie",
+     "Arbre fruitier"
+    ],
+    [
+     "À photographier",
+     "Fruit rouge, fleurs roses, feuilles"
+    ],
+    [
+     "Usages",
+     "Fruit frais"
+    ]
+   ]
+  },
+  {
+   "id": "vi-tahiti",
+   "ta": "Vī Tahiti",
+   "fr": "Pomme cythère",
+   "sci": "Spondias dulcis",
+   "info": [
+    [
+     "Catégorie",
+     "Arbre fruitier"
+    ],
+    [
+     "À photographier",
+     "Fruit vert/jaune, feuilles composées"
+    ],
+    [
+     "Usages",
+     "Fruit frais ou en salade"
+    ]
+   ],
+   "warn": "Noyau épineux",
+   "similar": [
+    "vi-popaa"
+   ]
+  },
+  {
+   "id": "vi-popaa",
+   "ta": "Vī popaʻa",
+   "fr": "Manguier",
+   "sci": "Mangifera indica",
+   "info": [
+    [
+     "Catégorie",
+     "Arbre fruitier"
+    ],
+    [
+     "À photographier",
+     "Fruit, feuilles longues, fleurs"
+    ],
+    [
+     "Usages",
+     "Fruit"
+    ]
+   ],
+   "warn": "Sève irritante",
+   "similar": [
+    "vi-tahiti"
+   ]
+  },
+  {
+   "id": "iita",
+   "ta": "ʻĪʻita",
+   "fr": "Papayer",
+   "sci": "Carica papaya",
+   "info": [
+    [
+     "Catégorie",
+     "Plante fruitière"
+    ],
+    [
+     "À photographier",
+     "Tronc sans branches, feuilles lobées, fruit"
+    ],
+    [
+     "Usages",
+     "Fruit, papaye verte en cuisine"
+    ]
+   ]
+  },
+  {
+   "id": "painapo",
+   "ta": "Painapo",
+   "fr": "Ananas",
+   "sci": "Ananas comosus",
+   "info": [
+    [
+     "Catégorie",
+     "Plante fruitière"
+    ],
+    [
+     "À photographier",
+     "Fruit, rosette de feuilles"
+    ],
+    [
+     "Usages",
+     "Fruit"
+    ]
+   ],
+   "warn": "Feuilles piquantes"
+  },
+  {
+   "id": "taporo",
+   "ta": "Taporo",
+   "fr": "Citron vert",
+   "sci": "Citrus × aurantiifolia",
+   "info": [
+    [
+     "Catégorie",
+     "Arbre fruitier"
+    ],
+    [
+     "À photographier",
+     "Fruit, feuilles, épines"
+    ],
+    [
+     "Usages",
+     "Jus (poisson cru)"
+    ]
+   ],
+   "warn": "Épines"
+  },
+  {
+   "id": "umara",
+   "ta": "ʻUmara",
+   "fr": "Patate douce",
+   "sci": "Ipomoea batatas",
+   "info": [
+    [
+     "Catégorie",
+     "Tubercule"
+    ],
+    [
+     "À photographier",
+     "Feuilles, tiges rampantes"
+    ],
+    [
+     "Usages",
+     "Tubercule et feuilles cuits"
+    ]
+   ]
+  },
+  {
+   "id": "motoi",
+   "ta": "Mōtoʻi",
+   "fr": "Ylang-ylang",
+   "sci": "Cananga odorata",
+   "info": [
+    [
+     "Catégorie",
+     "Arbre à fleurs"
+    ],
+    [
+     "À photographier",
+     "Fleur jaune-vert pendante, feuilles"
+    ],
+    [
+     "Usages",
+     "Parfum, couronnes, monoï"
+    ]
+   ]
+  },
+  {
+   "id": "tou",
+   "ta": "Tou",
+   "fr": "Cordia",
+   "sci": "Cordia subcordata",
+   "info": [
+    [
+     "Catégorie",
+     "Arbre"
+    ],
+    [
+     "À photographier",
+     "Fleur orange, feuilles, fruit"
+    ],
+    [
+     "Usages",
+     "Bois sculpté (umete)"
+    ]
+   ]
+  },
+  {
+   "id": "miro",
+   "ta": "Miro",
+   "fr": "Bois de rose d'Océanie",
+   "sci": "Thespesia populnea",
+   "info": [
+    [
+     "Catégorie",
+     "Arbre"
+    ],
+    [
+     "À photographier",
+     "Fleur jaune à cœur pourpre, feuille en cœur"
+    ],
+    [
+     "Usages",
+     "Bois de sculpture, arbre des marae"
+    ]
+   ],
+   "warn": "Ressemble au pūrau",
+   "similar": [
+    "purau"
+   ]
+  },
+  {
+   "id": "aito",
+   "ta": "ʻAito",
+   "fr": "Bois de fer, filao",
+   "sci": "Casuarina equisetifolia",
+   "info": [
+    [
+     "Catégorie",
+     "Arbre"
+    ],
+    [
+     "À photographier",
+     "Aiguilles, petits cônes, tronc"
+    ],
+    [
+     "Usages",
+     "Bois très dur"
+    ]
+   ]
+  },
+  {
+   "id": "tiairi",
+   "ta": "Tiʻairi",
+   "fr": "Bancoulier",
+   "sci": "Aleurites moluccanus",
+   "info": [
+    [
+     "Catégorie",
+     "Arbre"
+    ],
+    [
+     "À photographier",
+     "Feuillage pâle argenté, noix"
+    ],
+    [
+     "Usages",
+     "Noix (éclairage, teinture), rāʻau"
+    ]
+   ],
+   "warn": "Noix crue purgative"
+  },
+  {
+   "id": "hutu",
+   "ta": "Hutu",
+   "fr": "Barringtonia, bonnet d'évêque",
+   "sci": "Barringtonia asiatica",
+   "info": [
+    [
+     "Catégorie",
+     "Arbre de bord de mer"
+    ],
+    [
+     "À photographier",
+     "Fruit en forme de cube, grande fleur à étamines"
+    ],
+    [
+     "Usages",
+     "Ombre en bord de mer"
+    ]
+   ],
+   "danger": "Graines toxiques : ne jamais les manger."
+  },
+  {
+   "id": "vanira",
+   "ta": "Vanira",
+   "fr": "Vanille de Tahiti",
+   "sci": "Vanilla tahitensis",
+   "info": [
+    [
+     "Catégorie",
+     "Liane"
+    ],
+    [
+     "À photographier",
+     "Gousses, feuilles épaisses, fleur"
+    ],
+    [
+     "Usages",
+     "Épice (Tahaʻa)"
+    ]
+   ]
+  },
+  {
+   "id": "rea",
+   "ta": "Rea",
+   "fr": "Curcuma",
+   "sci": "Curcuma longa",
+   "info": [
+    [
+     "Catégorie",
+     "Herbe"
+    ],
+    [
+     "À photographier",
+     "Feuilles, fleur, rhizome jaune"
+    ],
+    [
+     "Usages",
+     "Cuisine, teinture, rāʻau"
+    ]
+   ]
+  },
+  {
+   "id": "mikonia",
+   "ta": "Mikonia",
+   "fr": "Miconia (« cancer vert »)",
+   "sci": "Miconia calvescens",
+   "info": [
+    [
+     "Catégorie",
+     "Arbre envahissant"
+    ],
+    [
+     "À photographier",
+     "Grande feuille, dessous violet, 3 nervures"
+    ],
+    [
+     "Usages",
+     "Aucun : espèce envahissante à signaler"
+    ]
+   ],
+   "warn": "Envahissante : ne la plante pas, ne transporte ni graines ni terre. Signale-la.",
+   "signal": true
+  },
+  {
+   "id": "datura",
+   "fr": "Trompette des anges (datura)",
+   "sci": "Brugmansia spp.",
+   "info": [
+    [
+     "Catégorie",
+     "Arbuste de jardin"
+    ],
+    [
+     "À photographier",
+     "Grandes fleurs pendantes en trompette (blanches, jaunes, roses), feuilles"
+    ],
+    [
+     "Usages",
+     "Ornement"
+    ]
+   ],
+   "danger": "Toute la plante est très toxique : hallucinations graves, peut tuer. Ne jamais en consommer, se laver les mains après l'avoir touchée.",
+   "similar": []
+  },
+  {
+   "id": "laurier-rose",
+   "fr": "Laurier-rose",
+   "sci": "Nerium oleander",
+   "info": [
+    [
+     "Catégorie",
+     "Arbuste de jardin"
+    ],
+    [
+     "À photographier",
+     "Fleurs roses, blanches ou rouges en bouquets, feuilles longues et dures"
+    ],
+    [
+     "Usages",
+     "Ornement, haies"
+    ]
+   ],
+   "danger": "Toutes les parties sont très toxiques, même la fumée du bois brûlé. Dangereux pour les enfants et les animaux."
+  },
+  {
+   "id": "pignon-inde",
+   "fr": "Pignon d'Inde",
+   "sci": "Jatropha curcas",
+   "info": [
+    [
+     "Catégorie",
+     "Arbuste"
+    ],
+    [
+     "À photographier",
+     "Feuilles en cœur à lobes, fruits verts puis jaunes à 3 graines"
+    ],
+    [
+     "Usages",
+     "Haies, huile non alimentaire"
+    ]
+   ],
+   "danger": "Graines très toxiques, surtout pour les enfants (vomissements graves). Ne jamais les manger."
+  },
+  {
+   "id": "abrus",
+   "fr": "Liane réglisse (graines rouges et noires)",
+   "sci": "Abrus precatorius",
+   "info": [
+    [
+     "Catégorie",
+     "Liane"
+    ],
+    [
+     "À photographier",
+     "Gousses, petites graines rouge vif à point noir, feuilles fines"
+    ],
+    [
+     "Usages",
+     "Aucun sans danger"
+    ]
+   ],
+   "danger": "Graines très toxiques si elles sont mâchées ou percées. Ne pas en faire de colliers."
+  }
+ ],
+ "nuages": [
+  {
+   "id": "cumulus",
+   "fr": "Cumulus",
+   "sci": "Cu",
+   "info": [
+    [
+     "Altitude",
+     "Bas (0,5–2 km)"
+    ],
+    [
+     "Aspect",
+     "Gros flocons blancs de coton, base plate"
+    ],
+    [
+     "Annonce souvent",
+     "Beau temps s'ils restent petits"
+    ]
+   ],
+   "similar": [
+    "cumulonimbus"
+   ]
+  },
+  {
+   "id": "cumulonimbus",
+   "fr": "Cumulonimbus",
+   "sci": "Cb",
+   "info": [
+    [
+     "Altitude",
+     "Du bas jusqu'à 15–18 km sous les tropiques"
+    ],
+    [
+     "Aspect",
+     "Tour géante, sommet en enclume, base sombre"
+    ],
+    [
+     "Annonce souvent",
+     "Orage, grosse averse, rafales"
+    ]
+   ],
+   "warn": "Orage possible : se mettre à l'abri",
+   "similar": [
+    "cumulus"
+   ]
+  },
+  {
+   "id": "stratus",
+   "fr": "Stratus",
+   "sci": "St",
+   "info": [
+    [
+     "Altitude",
+     "Très bas (0–2 km)"
+    ],
+    [
+     "Aspect",
+     "Couche grise uniforme, accrochée aux montagnes"
+    ],
+    [
+     "Annonce souvent",
+     "Bruine, ciel couvert"
+    ]
+   ],
+   "similar": [
+    "nimbostratus"
+   ]
+  },
+  {
+   "id": "stratocumulus",
+   "fr": "Stratocumulus",
+   "sci": "Sc",
+   "info": [
+    [
+     "Altitude",
+     "Bas (0,5–2 km)"
+    ],
+    [
+     "Aspect",
+     "Rouleaux ou plaques grises avec des trous"
+    ],
+    [
+     "Annonce souvent",
+     "Temps gris, peu de pluie"
+    ]
+   ]
+  },
+  {
+   "id": "nimbostratus",
+   "fr": "Nimbostratus",
+   "sci": "Ns",
+   "info": [
+    [
+     "Altitude",
+     "Bas à moyen"
+    ],
+    [
+     "Aspect",
+     "Couche épaisse gris foncé, soleil caché"
+    ],
+    [
+     "Annonce souvent",
+     "Pluie continue pendant des heures"
+    ]
+   ],
+   "similar": [
+    "stratus"
+   ]
+  },
+  {
+   "id": "altostratus",
+   "fr": "Altostratus",
+   "sci": "As",
+   "info": [
+    [
+     "Altitude",
+     "Moyen (2–7 km)"
+    ],
+    [
+     "Aspect",
+     "Voile gris-bleu, soleil comme derrière une vitre dépolie"
+    ],
+    [
+     "Annonce souvent",
+     "Pluie possible dans les heures qui suivent"
+    ]
+   ],
+   "similar": [
+    "cirrostratus"
+   ]
+  },
+  {
+   "id": "altocumulus",
+   "fr": "Altocumulus",
+   "sci": "Ac",
+   "info": [
+    [
+     "Altitude",
+     "Moyen (2–7 km)"
+    ],
+    [
+     "Aspect",
+     "Petits galets ou moutons en rangées"
+    ],
+    [
+     "Annonce souvent",
+     "Changement de temps possible"
+    ]
+   ],
+   "similar": [
+    "cirrocumulus"
+   ]
+  },
+  {
+   "id": "cirrus",
+   "fr": "Cirrus",
+   "sci": "Ci",
+   "info": [
+    [
+     "Altitude",
+     "Haut (5–13 km)"
+    ],
+    [
+     "Aspect",
+     "Filaments blancs fins, « queues de cheval »"
+    ],
+    [
+     "Annonce souvent",
+     "Beau temps, changement possible dans 1–2 jours"
+    ]
+   ]
+  },
+  {
+   "id": "cirrostratus",
+   "fr": "Cirrostratus",
+   "sci": "Cs",
+   "info": [
+    [
+     "Altitude",
+     "Haut (5–13 km)"
+    ],
+    [
+     "Aspect",
+     "Voile blanc très fin, halo autour du soleil"
+    ],
+    [
+     "Annonce souvent",
+     "Arrivée possible d'un temps plus humide"
+    ]
+   ],
+   "similar": [
+    "altostratus"
+   ]
+  },
+  {
+   "id": "cirrocumulus",
+   "fr": "Cirrocumulus",
+   "sci": "Cc",
+   "info": [
+    [
+     "Altitude",
+     "Haut (5–13 km)"
+    ],
+    [
+     "Aspect",
+     "Tout petits grains blancs, « ciel pommelé »"
+    ],
+    [
+     "Annonce souvent",
+     "Temps variable"
+    ]
+   ],
+   "similar": [
+    "altocumulus"
+   ]
+  }
+ ],
+ "oiseaux": [
+  {
+   "id": "omamao",
+   "ta": "ʻŌmāmao",
+   "fr": "Monarque de Tahiti",
+   "sci": "Pomarea nigra",
+   "info": [
+    [
+     "Statut",
+     "En danger critique d'extinction"
+    ],
+    [
+     "Où le voir",
+     "Quelques vallées protégées de Tahiti"
+    ]
+   ],
+   "warn": "Oiseau très rare : garde tes distances, ne repasse jamais son chant, ne partage pas l'endroit exact.",
+   "rare": true
+  },
+  {
+   "id": "ruro",
+   "ta": "Ruro",
+   "fr": "Martin-chasseur vénéré",
+   "sci": "Todiramphus veneratus",
+   "info": [
+    [
+     "Statut",
+     "Endémique"
+    ],
+    [
+     "Où le voir",
+     "Forêts et vallées"
+    ]
+   ]
+  },
+  {
+   "id": "uupa",
+   "ta": "ʻUʻupa",
+   "fr": "Ptilope de la Société",
+   "sci": "Ptilinopus purpuratus",
+   "info": [
+    [
+     "Statut",
+     "Endémique"
+    ],
+    [
+     "Où le voir",
+     "Forêts, arbres fruitiers"
+    ]
+   ]
+  },
+  {
+   "id": "otatare",
+   "ta": "ʻŌtātare",
+   "fr": "Rousserolle de Tahiti",
+   "sci": "Acrocephalus caffer",
+   "info": [
+    [
+     "Statut",
+     "Endémique, menacé"
+    ],
+    [
+     "Où le voir",
+     "Bambous des vallées"
+    ]
+   ],
+   "warn": "Oiseau menacé : garde tes distances, ne le dérange pas, ne partage pas l'endroit exact.",
+   "rare": true
+  },
+  {
+   "id": "opea",
+   "ta": "ʻŌpeʻa",
+   "fr": "Salangane de la Société",
+   "sci": "Aerodramus leucophaeus",
+   "info": [
+    [
+     "Statut",
+     "Endémique, menacé"
+    ],
+    [
+     "Où le voir",
+     "Vole au-dessus des vallées"
+    ]
+   ],
+   "rare": true,
+   "warn": "Oiseau menacé : garde tes distances, ne le dérange pas, ne partage pas l'endroit exact."
+  },
+  {
+   "id": "itatae",
+   "ta": "ʻĪtātae",
+   "fr": "Sterne blanche (gygis)",
+   "sci": "Gygis alba",
+   "info": [
+    [
+     "Statut",
+     "Indigène"
+    ],
+    [
+     "Où le voir",
+     "Arbres du littoral, motu"
+    ]
+   ],
+   "similar": [
+    "otuu"
+   ]
+  },
+  {
+   "id": "otuu",
+   "ta": "ʻŌtūʻu",
+   "fr": "Aigrette sacrée",
+   "sci": "Egretta sacra",
+   "info": [
+    [
+     "Statut",
+     "Indigène"
+    ],
+    [
+     "Où le voir",
+     "Bord de mer, récif"
+    ]
+   ],
+   "similar": [
+    "itatae"
+   ]
+  },
+  {
+   "id": "otaha",
+   "ta": "ʻŌtaha",
+   "fr": "Frégate",
+   "sci": "Fregata spp.",
+   "info": [
+    [
+     "Statut",
+     "Indigène"
+    ],
+    [
+     "Où le voir",
+     "Au-dessus du lagon"
+    ]
+   ]
+  },
+  {
+   "id": "uaau",
+   "ta": "ʻUaʻau",
+   "fr": "Puffin du Pacifique",
+   "sci": "Ardenna pacifica",
+   "info": [
+    [
+     "Statut",
+     "Indigène"
+    ],
+    [
+     "Où le voir",
+     "En mer, nids sur les motu"
+    ]
+   ]
+  },
+  {
+   "id": "torea",
+   "ta": "Tōrea",
+   "fr": "Pluvier fauve",
+   "sci": "Pluvialis fulva",
+   "info": [
+    [
+     "Statut",
+     "Migrateur"
+    ],
+    [
+     "Où le voir",
+     "Pelouses, plages"
+    ]
+   ]
+  },
+  {
+   "id": "moa",
+   "ta": "Moa",
+   "fr": "Poule et coq",
+   "sci": "Gallus gallus",
+   "info": [
+    [
+     "Statut",
+     "Introduit"
+    ],
+    [
+     "Où le voir",
+     "Partout"
+    ]
+   ]
+  },
+  {
+   "id": "martin",
+   "fr": "Martin triste",
+   "sci": "Acridotheres tristis",
+   "info": [
+    [
+     "Statut",
+     "Introduit, envahissant"
+    ],
+    [
+     "Où le voir",
+     "Villes, jardins"
+    ]
+   ]
+  },
+  {
+   "id": "bulbul",
+   "fr": "Bulbul à ventre rouge",
+   "sci": "Pycnonotus cafer",
+   "info": [
+    [
+     "Statut",
+     "Introduit, envahissant"
+    ],
+    [
+     "Où le voir",
+     "Jardins, forêts"
+    ]
+   ],
+   "warn": "Menace les oiseaux endémiques"
+  },
+  {
+   "id": "tourterelle",
+   "fr": "Tourterelle zébrée",
+   "sci": "Geopelia striata",
+   "info": [
+    [
+     "Statut",
+     "Introduit"
+    ],
+    [
+     "Où le voir",
+     "Jardins, bords de route"
+    ]
+   ]
+  },
+  {
+   "id": "astrild",
+   "fr": "Astrild ondulé",
+   "sci": "Estrilda astrild",
+   "info": [
+    [
+     "Statut",
+     "Introduit"
+    ],
+    [
+     "Où le voir",
+     "Herbes hautes, en groupes"
+    ]
+   ]
+  }
+ ],
+ "insectes": [
+  {
+   "id": "namu",
+   "ta": "Namu",
+   "fr": "Moustique (Aedes)",
+   "sci": "Aedes aegypti, Aedes polynesiensis",
+   "info": [
+    [
+     "Groupe",
+     "Insecte"
+    ],
+    [
+     "Signes",
+     "Petit, rayures noires et blanches, pique le jour"
+    ]
+   ],
+   "warn": "Dengue, chikungunya, zika, filariose : vide l'eau stagnante."
+  },
+  {
+   "id": "rao",
+   "ta": "Rao",
+   "fr": "Mouche domestique",
+   "sci": "Musca domestica",
+   "info": [
+    [
+     "Groupe",
+     "Insecte"
+    ],
+    [
+     "Signes",
+     "Grise, yeux rouges"
+    ]
+   ],
+   "warn": "Contamine la nourriture"
+  },
+  {
+   "id": "ro",
+   "ta": "Rō",
+   "fr": "Fourmi",
+   "sci": "Formicidae",
+   "info": [
+    [
+     "Groupe",
+     "Insecte"
+    ],
+    [
+     "Signes",
+     "En colonnes, plusieurs espèces"
+    ]
+   ],
+   "similar": [
+    "fourmi-feu"
+   ]
+  },
+  {
+   "id": "fourmi-feu",
+   "fr": "Petite fourmi de feu",
+   "sci": "Wasmannia auropunctata",
+   "info": [
+    [
+     "Groupe",
+     "Insecte"
+    ],
+    [
+     "Signes",
+     "Minuscule (1,5 mm), dorée à orangée, lente, piqûre brûlante"
+    ]
+   ],
+   "warn": "Envahissante : ne transporte ni plantes, ni terre, ni pots. Signale-la.",
+   "similar": [
+    "ro"
+   ],
+   "signal": true
+  },
+  {
+   "id": "popoti",
+   "ta": "Popoti",
+   "fr": "Cafard, blatte",
+   "sci": "Periplaneta americana",
+   "info": [
+    [
+     "Groupe",
+     "Insecte"
+    ],
+    [
+     "Signes",
+     "Brun roux, longues antennes"
+    ]
+   ],
+   "warn": "Hygiène"
+  },
+  {
+   "id": "guepe",
+   "fr": "Guêpe",
+   "sci": "Polistes spp.",
+   "info": [
+    [
+     "Groupe",
+     "Insecte"
+    ],
+    [
+     "Signes",
+     "Taille fine, nid en alvéoles sous les toits"
+    ]
+   ],
+   "warn": "Piqûre douloureuse, allergie possible",
+   "similar": [
+    "manu-meri"
+   ]
+  },
+  {
+   "id": "manu-meri",
+   "ta": "Manu meri",
+   "fr": "Abeille",
+   "sci": "Apis mellifera",
+   "info": [
+    [
+     "Groupe",
+     "Insecte"
+    ],
+    [
+     "Signes",
+     "Velue, dorée, butine les fleurs"
+    ]
+   ],
+   "warn": "Piqûre, allergie possible ; utile (miel)",
+   "similar": [
+    "guepe"
+   ]
+  },
+  {
+   "id": "pepe",
+   "ta": "Pepe",
+   "fr": "Papillon",
+   "sci": "Lepidoptera",
+   "info": [
+    [
+     "Groupe",
+     "Insecte"
+    ],
+    [
+     "Signes",
+     "Grandes ailes colorées"
+    ]
+   ]
+  },
+  {
+   "id": "cicadelle",
+   "fr": "Cicadelle pisseuse",
+   "sci": "Homalodisca vitripennis",
+   "info": [
+    [
+     "Groupe",
+     "Insecte"
+    ],
+    [
+     "Signes",
+     "Petite, brune, « pluie » sous les arbres"
+    ]
+   ],
+   "warn": "Envahissante : signale-la si tu en vois beaucoup.",
+   "signal": true
+  },
+  {
+   "id": "veri",
+   "ta": "Veri",
+   "fr": "Scolopendre",
+   "sci": "Scolopendra subspinipes",
+   "info": [
+    [
+     "Groupe",
+     "Mille-pattes (pas un insecte)"
+    ],
+    [
+     "Signes",
+     "Long, plat, nombreuses pattes, brun-rouge"
+    ]
+   ],
+   "danger": "Morsure très douloureuse. Consulte si c'est un enfant, si ça gonfle beaucoup ou en cas de malaise."
+  },
+  {
+   "id": "araignee",
+   "fr": "Araignée",
+   "sci": "Araneae",
+   "info": [
+    [
+     "Groupe",
+     "Araignée (pas un insecte)"
+    ],
+    [
+     "Signes",
+     "8 pattes, toile"
+    ]
+   ]
+  }
+ ],
+ "champignons": [
+  {
+   "id": "lepiote-verte",
+   "fr": "Lépiote à spores vertes",
+   "sci": "Chlorophyllum molybdites",
+   "info": [
+    [
+     "Où il pousse",
+     "Pelouses, après la pluie"
+    ],
+    [
+     "Signes",
+     "Grand chapeau blanc à écailles brunes, lamelles verdâtres"
+    ]
+   ],
+   "similar": [
+    "lepiote-jaune"
+   ],
+   "danger": "TRÈS TOXIQUE : cause fréquente d'intoxication en zone tropicale. Ne jamais le manger."
+  },
+  {
+   "id": "lepiote-jaune",
+   "fr": "Lépiote jaune des pots",
+   "sci": "Leucocoprinus birnbaumii",
+   "info": [
+    [
+     "Où il pousse",
+     "Pots de fleurs, terreau"
+    ],
+    [
+     "Signes",
+     "Petit, jaune vif, chapeau en cloche"
+    ]
+   ],
+   "similar": [
+    "lepiote-verte"
+   ],
+   "danger": "Toxique : ne jamais le manger, éloigner des enfants et animaux."
+  },
+  {
+   "id": "oreille-judas",
+   "fr": "Oreille de Judas",
+   "sci": "Auricularia spp.",
+   "info": [
+    [
+     "Où il pousse",
+     "Bois mort"
+    ],
+    [
+     "Signes",
+     "Forme d'oreille, brun, gélatineux"
+    ]
+   ],
+   "warn": "Ne rien manger sans avis d'expert"
+  },
+  {
+   "id": "schizophylle",
+   "fr": "Schizophylle commun",
+   "sci": "Schizophyllum commune",
+   "info": [
+    [
+     "Où il pousse",
+     "Bois mort, branches"
+    ],
+    [
+     "Signes",
+     "Petit éventail blanc velu"
+    ]
+   ],
+   "warn": "Ne rien manger sans avis d'expert"
+  },
+  {
+   "id": "polypore-rouge",
+   "fr": "Polypore rouge orangé",
+   "sci": "Pycnoporus sanguineus",
+   "info": [
+    [
+     "Où il pousse",
+     "Bois mort au soleil"
+    ],
+    [
+     "Signes",
+     "Console orange vif, dure"
+    ]
+   ],
+   "warn": "Non comestible"
+  },
+  {
+   "id": "ganoderme",
+   "fr": "Ganoderme",
+   "sci": "Ganoderma spp.",
+   "info": [
+    [
+     "Où il pousse",
+     "Troncs d'arbres"
+    ],
+    [
+     "Signes",
+     "Grande console brune et vernie"
+    ]
+   ],
+   "warn": "Non comestible ; signe d'arbre malade"
+  }
+ ],
+ "credits": [
+  "Brian Brigato"
+ ]
+}

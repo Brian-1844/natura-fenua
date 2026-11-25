@@ -768,6 +768,296 @@
     ]
    ],
    "danger": "Graines très toxiques si elles sont mâchées ou percées. Ne pas en faire de colliers."
+  },
+  {
+   "id": "zamioculcas",
+   "fr": "Plante ZZ (Zamioculcas), dite aussi « plante de jade »",
+   "sci": "Zamioculcas zamiifolia",
+   "info": [
+    [
+     "Catégorie",
+     "Plante d'intérieur et de jardin"
+    ],
+    [
+     "À photographier",
+     "Feuilles épaisses et brillantes alignées des deux côtés d'une tige épaisse, base renflée"
+    ],
+    [
+     "Usages",
+     "Ornement, très résistante ; gardée comme porte-bonheur pour attirer la prospérité"
+    ]
+   ],
+   "warn": "Toxique si on la mâche : sève irritante pour la bouche et le ventre. Se laver les mains après la taille, éloigner des enfants et des animaux.",
+   "similar": [
+    "crassula"
+   ]
+  },
+  {
+   "id": "crassula",
+   "fr": "Plante de jade (crassula)",
+   "sci": "Crassula ovata",
+   "info": [
+    [
+     "Catégorie",
+     "Plante grasse"
+    ],
+    [
+     "À photographier",
+     "Petit tronc ligneux, feuilles rondes, charnues et épaisses, parfois bordées de rouge"
+    ],
+    [
+     "Usages",
+     "Ornement, porte-bonheur"
+    ]
+   ],
+   "warn": "Légèrement toxique pour les chiens et les chats.",
+   "similar": [
+    "zamioculcas"
+   ]
+  },
+  {
+   "id": "sansevieria-cyl",
+   "fr": "Sansevière cylindrique",
+   "sci": "Sansevieria cylindrica (Dracaena angolensis)",
+   "info": [
+    [
+     "Catégorie",
+     "Plante grasse d'intérieur et de jardin"
+    ],
+    [
+     "À photographier",
+     "Longues feuilles en baguettes rondes, vert-gris, striées"
+    ],
+    [
+     "Usages",
+     "Ornement, très résistante"
+    ]
+   ],
+   "warn": "Légèrement toxique si on la mange (enfants, animaux).",
+   "similar": [
+    "sansevieria-trif"
+   ]
+  },
+  {
+   "id": "aloes",
+   "fr": "Aloès tacheté",
+   "sci": "Aloe spp.",
+   "info": [
+    [
+     "Catégorie",
+     "Plante grasse"
+    ],
+    [
+     "À photographier",
+     "Feuilles en rosette, taches blanches, petites dents sur les bords"
+    ],
+    [
+     "Usages",
+     "Ornement ; gel de certaines espèces utilisé sur la peau"
+    ]
+   ],
+   "warn": "Le jus jaune sous la peau est laxatif : ne pas le manger."
+  },
+  {
+   "id": "monstera",
+   "fr": "Monstera (faux philodendron, plante gruyère)",
+   "sci": "Monstera deliciosa",
+   "info": [
+    [
+     "Catégorie",
+     "Liane grimpante d'ornement"
+    ],
+    [
+     "À photographier",
+     "Très grandes feuilles brillantes découpées et trouées, grosses tiges, racines aériennes qui pendent"
+    ],
+    [
+     "Usages",
+     "Ornement ; fruit comestible seulement quand il est bien mûr"
+    ]
+   ],
+   "warn": "Feuilles, tiges et fruit vert irritants s'ils sont mâchés (bouche, gorge). Ne mange le fruit que bien mûr, quand ses écailles tombent toutes seules."
+  },
+  {
+   "id": "bauhinia",
+   "fr": "Bauhinia (arbre à orchidées)",
+   "sci": "Bauhinia purpurea (probable)",
+   "info": [
+    [
+     "Catégorie",
+     "Arbre à fleurs d'ornement"
+    ],
+    [
+     "À photographier",
+     "Feuilles en cœur fendu en deux (forme de sabot), fleurs rose-violet à 5 pétales étroits, longues gousses plates"
+    ],
+    [
+     "Usages",
+     "Ornement des rues et jardins, ombre"
+    ]
+   ],
+   "warn": "Ne mange ni les gousses ni les graines."
+  },
+  {
+   "id": "groseillier",
+   "fr": "Groseillier de Tahiti (surette)",
+   "sci": "Phyllanthus acidus",
+   "info": [
+    [
+     "Catégorie",
+     "Arbre fruitier"
+    ],
+    [
+     "À photographier",
+     "Grappes de petits fruits côtelés jaune pâle collés aux branches et au tronc, feuilles en petites folioles alignées"
+    ],
+    [
+     "Usages",
+     "Fruit très acide : confitures, sirop, achards, avec du sel"
+    ]
+   ],
+   "warn": "Très acide : avec modération, surtout pour les estomacs sensibles."
+  },
+  {
+   "id": "rivina",
+   "fr": "Petite groseille rouge (rivina)",
+   "sci": "Rivina humilis",
+   "info": [
+    [
+     "Catégorie",
+     "Petite plante de sous-bois"
+    ],
+    [
+     "À photographier",
+     "Épis de petites baies rouge vif brillantes, petites fleurs blanches, feuilles ovales"
+    ],
+    [
+     "Usages",
+     "Ornement ; ancienne teinture rouge"
+    ]
+   ],
+   "warn": "Ne mange pas les baies : légèrement toxiques, surtout pour les enfants."
+  },
+  {
+   "id": "adiantum",
+   "fr": "Capillaire (fougère à tiges noires)",
+   "sci": "Adiantum sp.",
+   "info": [
+    [
+     "Catégorie",
+     "Fougère"
+    ],
+    [
+     "À photographier",
+     "Tiges noires et fines comme des cheveux, folioles en éventail, bords dentés portant les spores"
+    ],
+    [
+     "Usages",
+     "Ornement, sous-bois humide"
+    ]
+   ]
+  },
+  {
+   "id": "pteris-argentee",
+   "fr": "Fougère argentée",
+   "sci": "Pteris sp. (probablement P. ensiformis 'Victoriae')",
+   "info": [
+    [
+     "Catégorie",
+     "Fougère"
+    ],
+    [
+     "À photographier",
+     "Folioles vertes avec une bande blanche-argentée au centre, sur rochers et talus humides"
+    ],
+    [
+     "Usages",
+     "Ornement"
+    ]
+   ]
+  },
+  {
+   "id": "kalanchoe",
+   "fr": "Plante de la vie (kalanchoé, feuille du miracle)",
+   "sci": "Kalanchoe pinnata",
+   "info": [
+    [
+     "Catégorie",
+     "Plante grasse"
+    ],
+    [
+     "À photographier",
+     "Feuilles épaisses et charnues, bords en festons, petites plantules qui poussent sur le bord des feuilles"
+    ],
+    [
+     "Usages",
+     "Rāʻau (médecine traditionnelle, en usage externe surtout), ornement"
+    ]
+   ],
+   "warn": "Toxique si on en mange beaucoup, surtout pour les animaux. Pas d'usage interne sans avis médical."
+  },
+  {
+   "id": "sansevieria-trif",
+   "fr": "Langue de belle-mère (sansevière)",
+   "sci": "Sansevieria trifasciata (Dracaena trifasciata)",
+   "info": [
+    [
+     "Catégorie",
+     "Plante grasse"
+    ],
+    [
+     "À photographier",
+     "Longues feuilles dressées, plates et pointues, rayées de bandes vert foncé en zigzag"
+    ],
+    [
+     "Usages",
+     "Ornement, haies, très résistante"
+    ]
+   ],
+   "warn": "Légèrement toxique si on la mange (enfants, animaux).",
+   "similar": [
+    "sansevieria-cyl"
+   ]
+  },
+  {
+   "id": "croton",
+   "fr": "Croton",
+   "sci": "Codiaeum variegatum",
+   "info": [
+    [
+     "Catégorie",
+     "Arbuste d'ornement"
+    ],
+    [
+     "À photographier",
+     "Grandes feuilles épaisses vertes, jaunes, orange ou rouges, nervures colorées"
+    ],
+    [
+     "Usages",
+     "Haies et jardins colorés"
+    ]
+   ],
+   "warn": "Sève blanche irritante pour la peau et les yeux ; graines et feuilles toxiques si mangées."
+  },
+  {
+   "id": "sensitive",
+   "fr": "Sensitive (mimosa pudique)",
+   "sci": "Mimosa pudica",
+   "info": [
+    [
+     "Catégorie",
+     "Petite plante rampante"
+    ],
+    [
+     "À photographier",
+     "Petites feuilles en plumes qui se referment quand on les touche, boules de fleurs roses"
+    ],
+    [
+     "Usages",
+     "Curiosité pour les enfants"
+    ]
+   ],
+   "warn": "Tiges épineuses. Envahissante dans les pâturages."
   }
  ],
  "nuages": [

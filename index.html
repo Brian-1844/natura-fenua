@@ -274,7 +274,7 @@ label.chk{display:flex;gap:10px;align-items:flex-start;margin:8px 0;font-size:15
 
 <script src="vendor/leaflet/leaflet.js"></script>
 <script>
-const APP_VERSION='0.4.0';
+const APP_VERSION='0.4.6';
 const REPO='Brian-1844/natura-fenua';
 const APK='natura-fenua.apk';
 const MPCDN='https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.14';
@@ -769,7 +769,11 @@ async function offlineState(){const P=$('#offPill');
   $('#credits').textContent=DATA.credits&&DATA.credits.length?'Māuruuru aux photographes : '+DATA.credits.join(', '):'';
   try{navigator.storage&&navigator.storage.persist&&navigator.storage.persist()}catch(e){}
   if(LS.get('nf_seen'))go('home',false);else showWelcome();
-  applySchool();offlineState();if(LS.get('nf_demo')==='1')setDemo(true);
+  applySchool();offlineState();
+  /* Aperçu dans une page intégrée (ex. claude.ai) : l'IA ne peut pas s'y télécharger, on démarre en mode démo. */
+  const PREVIEW=(()=>{try{return window.top!==window}catch(e){return true}})();
+  if(LS.get('nf_demo')==='1'||(PREVIEW&&LS.get('nf_demo')!=='0'))setDemo(true);
+  if(PREVIEW)$('#offPill').textContent="Aperçu en ligne : la vraie reconnaissance marche dans l'app Android";
   renderHome();
   try{const b=await(await fetch('build.json',{cache:'no-store'})).json();BUILD=b.build||0}catch(e){}
   setTimeout(()=>checkUpdate(false),3000);

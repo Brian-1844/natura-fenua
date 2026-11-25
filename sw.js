@@ -1,5 +1,5 @@
 // Natura Fenua – fonctionne hors ligne. Change le numéro à chaque nouvelle version.
-const CACHE='natura-fenua-0.4.0';
+const CACHE='natura-fenua-0.4.6';
 const FILES=['./','index.html','manifest.json','data.json','icon-192.png','icon-512.png','vendor/leaflet/leaflet.js','vendor/leaflet/leaflet.css','vendor/tahiti.geojson','demo/nono.jpg'];
 self.addEventListener('install',e=>{e.waitUntil(caches.open(CACHE).then(c=>c.addAll(FILES)));self.skipWaiting()});
 self.addEventListener('activate',e=>{e.waitUntil(caches.keys().then(k=>Promise.all(k.filter(n=>n!==CACHE).map(n=>caches.delete(n)))));self.clients.claim()});
